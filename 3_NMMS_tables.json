@@ -1,0 +1,320 @@
+[
+    {
+        "TableName": "Accessrestriction",
+        "Description": "Description: Specification of the access limits for vehicles which is enforced at a point on a link.",
+        "ReferenceTablesViaForeignKey": [
+            "Dimaccessrestrictiontype"
+        ]
+    },
+    {
+        "TableName": "Accessrestrictionexemption",
+        "Description": "Description: Which vehicles types, usage or load types are allowed to access at a point at a given link.",
+        "ReferenceTablesViaForeignKey": [
+            "Accessrestriction",
+            "Dimrestrictioncategorytype"
+        ]
+    },
+    {
+        "TableName": "Accessrestrictioninclusion",
+        "Description": "Description: Which vehicles types, usage or load types are not allowed to access at a point at a given link.",
+        "ReferenceTablesViaForeignKey": [
+            "Accessrestriction",
+            "Dimrestrictioncategorytype"
+        ]
+    },
+    {
+        "TableName": "Dimaccessrestrictiontype",
+        "Description": "Description:  Reference table with the different types of access restriction being enforced",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "Dimcarriagewaytype",
+        "Description": "Description:  Reference table with the different carriageway types of links",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "Dimdbfo",
+        "Description": "Description: A dimension table containing National Highways DBFO (Design Build Finance Operate) routes.",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "Dimdirection",
+        "Description": "Description: Reference table that contains the direction details",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "Dimdirectionality",
+        "Description": "Description: Reference table that contains the directionality details",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "Dimjunctiontype",
+        "Description": "Description: Reference table with the different types of junctions.",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "Dimlanetype",
+        "Description": "Description: Reference table with the different types of lanes.",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "Dimlinkcategory",
+        "Description": "Description: Reference table with the different category of links.",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "Dimlinktype",
+        "Description": "Description:  Reference table with the different types of links.",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "Dimnodetype",
+        "Description": "Description:  Reference table with the different types of nodes.",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "Dimoperationalstate",
+        "Description": "Description:  Reference table that contains the different operational states of roads.",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "Dimownership",
+        "Description": "Description:  Reference table with the different ownerships of links.",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "Dimrestrictioncategorytype",
+        "Description": "Description:  Reference table that contains the different category and category sub types of inclusion/exemption category of the turn, access and vehicle restrictions",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "Dimserviceproviderarearegion",
+        "Description": "Description: A table containing the relationship between ServiceProviderAreas and Regions.",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "Dimsmartmotorwaytype",
+        "Description": "Description:  Reference table with the different smart motorway types of links",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "Dimstreettype",
+        "Description": "Description:  Reference table with the different classifications of streets",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "Dimsurfacetype",
+        "Description": "Description:  Reference table that contains the different types of surface a street can have.",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "Dimturnrestrictiontype",
+        "Description": "Description:  Reference table with the different types of turn restriction being enforced",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "Dimvehiclerestrictiontype",
+        "Description": "Description:  Reference table with the different types of vehicle restriction being enforced",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "Junction",
+        "Description": "Description: Where two or more roads meet and vehicular traffic can move in different directions in a systematic way.",
+        "ReferenceTablesViaForeignKey": [
+            "Dimjunctiontype"
+        ]
+    },
+    {
+        "TableName": "Lane",
+        "Description": "Description: Part of a roadway that is designated to be used by a single line of vehicles to control and guide drivers and reduce traffic conflicts.",
+        "ReferenceTablesViaForeignKey": [
+            "Link",
+            "Dimlanetype",
+            "Dimdirectionality"
+        ]
+    },
+    {
+        "TableName": "Link",
+        "Description": "Description: A logical subdivision of the Network Model.",
+        "ReferenceTablesViaForeignKey": [
+            "Dimownership",
+            "Node",
+            "Dimlinktype",
+            "Dimcarriagewaytype",
+            "Dimlinkcategory",
+            "Dimdirection",
+            "Dimdirectionality",
+            "Dimsmartmotorwaytype",
+            "Dimoperationalstate"
+        ]
+    },
+    {
+        "TableName": "Linkaccessrestriction",
+        "Description": "Description: Bridge table between AccessRestriction and Link tables.",
+        "ReferenceTablesViaForeignKey": [
+            "Accessrestriction",
+            "Link",
+            "Dimdirectionality"
+        ]
+    },
+    {
+        "TableName": "Linkdbfo",
+        "Description": "Description: A table joining National Highways DBFO (Design Build Finance Operate) routes to network links.",
+        "ReferenceTablesViaForeignKey": [
+            "Link",
+            "Dimdbfo"
+        ]
+    },
+    {
+        "TableName": "Linkdirectionality",
+        "Description": "Bridge table between NM Link and traffic data to indicate the traffic is in which direction on the link. ",
+        "ReferenceTablesViaForeignKey": [
+            "Link"
+        ]
+    },
+    {
+        "TableName": "Linknodevehiclerestriction",
+        "Description": "Description: Bridge table between VehicleRestriction and both Node and Link tables.",
+        "ReferenceTablesViaForeignKey": [
+            "Vehiclerestriction",
+            "Link",
+            "Node",
+            "Dimdirectionality"
+        ]
+    },
+    {
+        "TableName": "Linkroad",
+        "Description": "Description: Bridge table between Link and Road tables.",
+        "ReferenceTablesViaForeignKey": [
+            "Road",
+            "Link"
+        ]
+    },
+    {
+        "TableName": "Linkserviceproviderarearegion",
+        "Description": "Description: A table joining network links to National Highways Service Provider Areas.",
+        "ReferenceTablesViaForeignKey": [
+            "Link",
+            "Dimserviceproviderarearegion"
+        ]
+    },
+    {
+        "TableName": "Linkstreet",
+        "Description": "Description: Bridge table between Street and Link tables.",
+        "ReferenceTablesViaForeignKey": [
+            "Street",
+            "Link"
+        ]
+    },
+    {
+        "TableName": "Linkturnrestriction",
+        "Description": "Description: Bridge table between TurnRestriction and Link tables.",
+        "ReferenceTablesViaForeignKey": [
+            "Turnrestriction",
+            "Link",
+            "Dimdirectionality"
+        ]
+    },
+    {
+        "TableName": "Linkvehiclerestriction",
+        "Description": "Description: Bridge table between VehicleRestriction and Link tables, where restrictions are associated with a specific node.",
+        "ReferenceTablesViaForeignKey": [
+            "Vehiclerestriction",
+            "Link"
+        ]
+    },
+    {
+        "TableName": "Node",
+        "Description": "Description: A zero dimensional Entity with a position but no volume that is usually represented by a small round dot.",
+        "ReferenceTablesViaForeignKey": [
+            "Dimnodetype"
+        ]
+    },
+    {
+        "TableName": "Nodejunction",
+        "Description": "Description: Bridge table between Junction and Node tables.",
+        "ReferenceTablesViaForeignKey": [
+            "Node",
+            "Junction"
+        ]
+    },
+    {
+        "TableName": "Road",
+        "Description": "Description: The Assets forming the drivable areas of the Strategic Road Network Asset.",
+        "ReferenceTablesViaForeignKey": [
+            "Dimlinkcategory"
+        ]
+    },
+    {
+        "TableName": "Speedlimit",
+        "Description": "Description: The maximum or minimum speed permitted by law in a given area under specified circumstances.",
+        "ReferenceTablesViaForeignKey": [
+            "Link",
+            "Lane",
+            "Dimlanetype",
+            "Dimdirectionality"
+        ]
+    },
+    {
+        "TableName": "Street",
+        "Description": "Description: Any road, footway, path, cycletrack, track or passageway that forms a highway. A highway represents individual subsections of Road which are managed (naming/numbering) by a specified responsible authority.",
+        "ReferenceTablesViaForeignKey": [
+            "Dimstreettype",
+            "Dimlinkcategory",
+            "Dimoperationalstate",
+            "Dimsurfacetype"
+        ]
+    },
+    {
+        "TableName": "Turnrestriction",
+        "Description": "Description: Specification of what turns may or may not be allowed from one link to another.",
+        "ReferenceTablesViaForeignKey": [
+            "Dimturnrestrictiontype"
+        ]
+    },
+    {
+        "TableName": "Turnrestrictionexemption",
+        "Description": "Description: Which vehicles types, usage or load types are allowed to turn at a given link.",
+        "ReferenceTablesViaForeignKey": [
+            "Turnrestriction",
+            "Dimrestrictioncategorytype"
+        ]
+    },
+    {
+        "TableName": "Turnrestrictioninclusion",
+        "Description": "Description: Which vehicles types, usage or load types are not allowed to turn at a given link.",
+        "ReferenceTablesViaForeignKey": [
+            "Turnrestriction",
+            "Dimrestrictioncategorytype"
+        ]
+    },
+    {
+        "TableName": "Unitofmeasurement",
+        "Description": "Description:  Reference table that defines the UoM abbreviations.",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "Vehiclerestriction",
+        "Description": "Description: Specification of the maximum length, height, width, or weight of vehicles that may have access at a point on a link.",
+        "ReferenceTablesViaForeignKey": [
+            "Dimvehiclerestrictiontype",
+            "Unitofmeasurement"
+        ]
+    },
+    {
+        "TableName": "Vehiclerestrictionexemption",
+        "Description": "Description:  Which vehicles types, usage or load types are allowed to access at a point where a vehicle restriction is in place at a given link.",
+        "ReferenceTablesViaForeignKey": [
+            "Vehiclerestriction",
+            "Dimrestrictioncategorytype"
+        ]
+    },
+    {
+        "TableName": "Vehiclerestrictioninclusion",
+        "Description": "Description: Which vehicles types, usage or load types are not allowed to access at a point where a vehicle restriction is in place at a given link.",
+        "ReferenceTablesViaForeignKey": [
+            "Vehiclerestriction",
+            "Dimrestrictioncategorytype"
+        ]
+    }
+]

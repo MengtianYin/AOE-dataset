@@ -1,0 +1,1625 @@
+@prefix ex: <http://example.org/ontology#> .
+@prefix bfo: <http://purl.obolibrary.org/obo/BFO_> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@base <http://www.w3.org/2002/07/owl#> .
+
+[ rdf:type owl:Ontology
+ ] .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://example.org/ontology#DataSource
+ex:DataSource rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#definition
+skos:definition rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://example.org/ontology#
+ex: rdf:type owl:ObjectProperty .
+
+
+###  http://example.org/ontology#addresses
+ex:addresses rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000055> ;
+             rdfs:domain ex:Job ;
+             rdfs:range ex:Hazard ;
+             rdfs:label "addresses" .
+
+
+###  http://example.org/ontology#affects
+ex:affects rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000055> ;
+           rdfs:domain ex:Payment ;
+           rdfs:range ex:Cost ;
+           rdfs:label "affects" .
+
+
+###  http://example.org/ontology#assesses
+ex:assesses rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000055> ;
+            rdfs:domain [ rdf:type owl:Class ;
+                          owl:unionOf ( ex:Enquiry
+                                        ex:Observation
+                                      )
+                        ] ;
+            rdfs:range [ rdf:type owl:Class ;
+                         owl:unionOf ( ex:Impact
+                                       ex:Tax
+                                     )
+                       ] ;
+            rdfs:label "assesses" .
+
+
+###  http://example.org/ontology#associated_with
+ex:associated_with rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_000084> ;
+                   rdfs:domain ex:Defect ;
+                   rdfs:range ex:Organisation ;
+                   rdfs:label "associated_with" .
+
+
+###  http://example.org/ontology#completes
+ex:completes rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000055> ;
+             rdfs:domain ex:Work ;
+             rdfs:range ex:InspectionType ;
+             rdfs:label "completes" .
+
+
+###  http://example.org/ontology#conditional_on
+ex:conditional_on rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_000084> ;
+                  rdfs:domain [ rdf:type owl:Class ;
+                                owl:unionOf ( ex:Turnrestriction
+                                              ex:VehicleRestriction
+                                            )
+                              ] ;
+                  rdfs:range [ rdf:type owl:Class ;
+                               owl:unionOf ( ex:Link
+                                             ex:Node
+                                           )
+                             ] ;
+                  rdfs:label "conditional_on" .
+
+
+###  http://example.org/ontology#conducts
+ex:conducts rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000055> ;
+            rdfs:domain ex:Inspection ;
+            rdfs:range ex:InspectionType ;
+            rdfs:label "conducts" .
+
+
+###  http://example.org/ontology#contained_in
+ex:contained_in rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000124> ;
+                rdfs:domain ex:Link ;
+                rdfs:range ex:Lane ;
+                rdfs:label "contained_in" .
+
+
+###  http://example.org/ontology#covers
+ex:covers rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000054> ;
+          rdfs:domain ex:InspectionType ;
+          rdfs:range ex:Work ;
+          rdfs:label "covers" .
+
+
+###  http://example.org/ontology#defined_at
+ex:defined_at rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000124> ;
+              rdfs:domain ex:Junction ;
+              rdfs:range ex:Node ;
+              rdfs:label "defined_at" .
+
+
+###  http://example.org/ontology#defines
+ex:defines rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf ex:others ;
+           rdfs:domain ex:MaintenanceRegime ;
+           rdfs:range ex:Priority ;
+           rdfs:label "defines" .
+
+
+###  http://example.org/ontology#dependent_on
+ex:dependent_on rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_000084> ;
+                rdfs:domain ex:Accessrestriction ;
+                rdfs:range ex:Link ;
+                rdfs:label "dependent_on" .
+
+
+###  http://example.org/ontology#depends_on
+ex:depends_on rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000194> ;
+              rdfs:domain ex:Street ;
+              rdfs:range ex:Designation ;
+              rdfs:label "depends_on" .
+
+
+###  http://example.org/ontology#depends_on_by
+ex:depends_on_by rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000194> ;
+                 rdfs:domain [ rdf:type owl:Class ;
+                               owl:unionOf ( ex:Asset
+                                             ex:Link
+                                             ex:Node
+                                             ex:Site
+                                             ex:Street
+                                           )
+                             ] ;
+                 rdfs:range [ rdf:type owl:Class ;
+                              owl:unionOf ( ex:Accessrestriction
+                                            ex:Cost
+                                            ex:Directionality
+                                            ex:Interest
+                                            ex:Lining
+                                            ex:LinkCategory
+                                            ex:Ownership
+                                            ex:Photo
+                                            ex:PointRepresentation
+                                            ex:Turnrestriction
+                                            ex:VehicleRestriction
+                                            ex:Video
+                                          )
+                            ] ;
+                 rdfs:label "depends_on_by" .
+
+
+###  http://example.org/ontology#derived_from
+ex:derived_from rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_000084> ;
+                rdfs:domain ex:ContinuousRepresentation ;
+                rdfs:range ex:Asset ;
+                rdfs:label "derived_from" .
+
+
+###  http://example.org/ontology#dimension_of
+ex:dimension_of rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000124> ;
+                rdfs:domain ex:Link ;
+                rdfs:range ex:Node ;
+                rdfs:label "dimension_of" .
+
+
+###  http://example.org/ontology#environs
+ex:environs rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000183> ;
+            rdfs:domain ex:FloodHotspot ;
+            rdfs:range ex:FloodIncident ;
+            rdfs:label "environs" .
+
+
+###  http://example.org/ontology#establishes
+ex:establishes rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000055> ;
+               rdfs:domain ex:Job ;
+               rdfs:range ex:Priority ;
+               rdfs:label "establishes" .
+
+
+###  http://example.org/ontology#exists_on
+ex:exists_on rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000124> ;
+             rdfs:domain ex:Link ;
+             rdfs:range [ rdf:type owl:Class ;
+                          owl:unionOf ( ex:Carriageway
+                                        ex:Street
+                                      )
+                        ] ;
+             rdfs:label "exists_on" .
+
+
+###  http://example.org/ontology#governs
+ex:governs rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000124> ;
+           rdfs:domain ex:Street ;
+           rdfs:range [ rdf:type owl:Class ;
+                        owl:unionOf ( ex:Organisation
+                                      ex:Site
+                                    )
+                      ] ;
+           rdfs:label "governs" .
+
+
+###  http://example.org/ontology#has_financial_requirement
+ex:has_financial_requirement rdf:type owl:ObjectProperty ;
+                             rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000199> ;
+                             rdfs:domain ex:Payment ;
+                             rdfs:range ex:Finance ;
+                             rdfs:label "has_financial_requirement" .
+
+
+###  http://example.org/ontology#has_relation_with
+ex:has_relation_with rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf ex:others ;
+                     rdfs:domain ex:Contract ;
+                     rdfs:range ex:Cost ;
+                     rdfs:label "has_relation_with" .
+
+
+###  http://example.org/ontology#implements
+ex:implements rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000055> ;
+              rdfs:domain ex:Job ;
+              rdfs:range ex:MaintenanceRegime ;
+              rdfs:label "implements" .
+
+
+###  http://example.org/ontology#included_in
+ex:included_in rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000171> ;
+               rdfs:domain ex:SoakawayAsset ;
+               rdfs:range ex:Scheme ;
+               rdfs:label "included_in" .
+
+
+###  http://example.org/ontology#includes
+ex:includes rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000054> ;
+            rdfs:domain [ rdf:type owl:Class ;
+                          owl:unionOf ( ex:Contract
+                                        ex:InspectionType
+                                      )
+                        ] ;
+            rdfs:range [ rdf:type owl:Class ;
+                         owl:unionOf ( ex:Observation
+                                       ex:Work
+                                     )
+                       ] ;
+            rdfs:label "includes" .
+
+
+###  http://example.org/ontology#incurs
+ex:incurs rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000055> ;
+          rdfs:domain [ rdf:type owl:Class ;
+                        owl:unionOf ( ex:Job
+                                      ex:Observation
+                                    )
+                      ] ;
+          rdfs:range [ rdf:type owl:Class ;
+                       owl:unionOf ( ex:Cost
+                                     ex:InspectionType
+                                   )
+                     ] ;
+          rdfs:label "incurs" .
+
+
+###  http://example.org/ontology#indicates
+ex:indicates rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000054> ;
+             rdfs:domain ex:Alert ;
+             rdfs:range ex:Work ;
+             rdfs:label "indicates" .
+
+
+###  http://example.org/ontology#integrated_into
+ex:integrated_into rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_000084> ;
+                   rdfs:domain ex:Lining ;
+                   rdfs:range ex:Asset ;
+                   rdfs:label "integrated_into" .
+
+
+###  http://example.org/ontology#investigates
+ex:investigates rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000055> ;
+                rdfs:domain ex:Enquiry ;
+                rdfs:range ex:Defect ;
+                rdfs:label "investigates" .
+
+
+###  http://example.org/ontology#is_affirmed_by
+ex:is_affirmed_by rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000055> ;
+                  rdfs:domain ex:Work ;
+                  rdfs:range ex:Contract ;
+                  rdfs:label "is_affirmed_by" .
+
+
+###  http://example.org/ontology#is_an_attribute_of
+ex:is_an_attribute_of rdf:type owl:ObjectProperty ;
+                      rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000124> ;
+                      rdfs:domain ex:Link ;
+                      rdfs:range ex:ServiceProviderRegion ;
+                      rdfs:label "is_an_attribute_of" .
+
+
+###  http://example.org/ontology#is_based_on
+ex:is_based_on rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_000084> ;
+               rdfs:domain ex:PointRepresentation ;
+               rdfs:range ex:Asset ;
+               rdfs:label "is_based_on" .
+
+
+###  http://example.org/ontology#is_correlated_with
+ex:is_correlated_with rdf:type owl:ObjectProperty ;
+                      rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_000084> ;
+                      rdfs:domain ex:Defect ;
+                      rdfs:range ex:Asset ;
+                      rdfs:label "is_correlated_with" .
+
+
+###  http://example.org/ontology#is_linked_to
+ex:is_linked_to rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000055> ;
+                rdfs:domain ex:Failure ;
+                rdfs:range ex:Contract ;
+                rdfs:label "is_linked_to" .
+
+
+###  http://example.org/ontology#is_located_in
+ex:is_located_in rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000171> ;
+                 rdfs:domain [ rdf:type owl:Class ;
+                               owl:unionOf ( ex:Asset
+                                             ex:CulvertAsset
+                                             ex:Lane
+                                             ex:Link
+                                             ex:Location
+                                             ex:Node
+                                             ex:OutfallAsset
+                                             ex:Street
+                                           )
+                             ] ;
+                 rdfs:range [ rdf:type owl:Class ;
+                              owl:unionOf ( ex:DBFO
+                                            ex:Link
+                                            ex:Scheme
+                                            ex:Site
+                                            ex:Surface
+                                          )
+                            ] ;
+                 rdfs:label "is_located_in" .
+
+
+###  http://example.org/ontology#leads_to
+ex:leads_to rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000055> ;
+            rdfs:domain ex:Enquiry ;
+            rdfs:range ex:Contract ;
+            rdfs:label "leads_to" .
+
+
+###  http://example.org/ontology#managed_by
+ex:managed_by rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_000084> ;
+              rdfs:domain ex:Contract ;
+              rdfs:range ex:Gang ;
+              rdfs:label "managed_by" .
+
+
+###  http://example.org/ontology#none
+ex:none rdf:type owl:ObjectProperty ;
+        rdfs:subPropertyOf ex:others ;
+        rdfs:domain [ rdf:type owl:Class ;
+                      owl:unionOf ( ex:Contract
+                                    ex:Correspondence
+                                    ex:Defect
+                                    ex:Enquiry
+                                    ex:Gang
+                                    ex:Inspection
+                                    ex:MaintenanceRegime
+                                    ex:RiskAssessment
+                                    ex:SorSchedule
+                                    ex:VehicleRestriction
+                                  )
+                    ] ;
+        rdfs:range [ rdf:type owl:Class ;
+                     owl:unionOf ( ex:Contract
+                                   ex:Cost
+                                   ex:Hazard
+                                   ex:Job
+                                   ex:Organisation
+                                   ex:Priority
+                                   ex:Tax
+                                   ex:UnitOfMeasurement
+                                   ex:Work
+                                 )
+                   ] ;
+        rdfs:label "none" .
+
+
+###  http://example.org/ontology#occurs_in
+ex:occurs_in rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000066> ;
+             rdfs:domain ex:FloodIncident ;
+             rdfs:range ex:FloodHotspot ;
+             rdfs:label "occurs_in" .
+
+
+###  http://example.org/ontology#operates_under
+ex:operates_under rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf ex:others ;
+                  rdfs:domain ex:Contract ;
+                  rdfs:range ex:MaintenanceRegime ;
+                  rdfs:label "operates_under" .
+
+
+###  http://example.org/ontology#others
+ex:others rdf:type owl:ObjectProperty ;
+          rdfs:label "others" .
+
+
+###  http://example.org/ontology#participates_in
+ex:participates_in rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000056> ;
+                   rdfs:domain [ rdf:type owl:Class ;
+                                 owl:unionOf ( ex:Asset
+                                               ex:Defect
+                                               ex:Gang
+                                             )
+                               ] ;
+                   rdfs:range [ rdf:type owl:Class ;
+                                owl:unionOf ( ex:Inspection
+                                              ex:Job
+                                              ex:Observation
+                                              ex:Work
+                                            )
+                              ] ;
+                   rdfs:label "participates_in" .
+
+
+###  http://example.org/ontology#performed_on
+ex:performed_on rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000057> ;
+                rdfs:domain [ rdf:type owl:Class ;
+                              owl:unionOf ( ex:Correspondence
+                                            ex:Enquiry
+                                            ex:Inspection
+                                            ex:Job
+                                            ex:Observation
+                                          )
+                            ] ;
+                rdfs:range [ rdf:type owl:Class ;
+                             owl:unionOf ( ex:Asset
+                                           ex:Gang
+                                           ex:Organisation
+                                           ex:Site
+                                         )
+                           ] ;
+                rdfs:label "performed_on" .
+
+
+###  http://example.org/ontology#pertains_to
+ex:pertains_to rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_000084> ;
+               rdfs:domain ex:Interest ;
+               rdfs:range ex:Site ;
+               rdfs:label "pertains_to" .
+
+
+###  http://example.org/ontology#realizes
+ex:realizes rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000055> ;
+            rdfs:domain ex:Job ;
+            rdfs:range ex:Contract ;
+            rdfs:label "realizes" .
+
+
+###  http://example.org/ontology#references
+ex:references rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000124> ;
+              rdfs:domain ex:DBFO ;
+              rdfs:range ex:Link ;
+              rdfs:label "references" .
+
+
+###  http://example.org/ontology#related_to
+ex:related_to rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_000084> ;
+              rdfs:domain ex:Cost ;
+              rdfs:range ex:Site ;
+              rdfs:label "related_to" .
+
+
+###  http://example.org/ontology#relates_to
+ex:relates_to rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000124> ;
+              rdfs:domain ex:Link ;
+              rdfs:range ex:Location ;
+              rdfs:label "relates_to" .
+
+
+###  http://example.org/ontology#represents
+ex:represents rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000055> ;
+              rdfs:domain ex:Correspondence ;
+              rdfs:range ex:Letter ;
+              rdfs:label "represents" .
+
+
+###  http://example.org/ontology#requires
+ex:requires rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_000084> ;
+            rdfs:domain ex:RegionRepresentation ;
+            rdfs:range ex:Asset ;
+            rdfs:label "requires" .
+
+
+###  http://example.org/ontology#restricted_by
+ex:restricted_by rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_000084> ;
+                 rdfs:domain ex:VehicleRestriction ;
+                 rdfs:range ex:Link ;
+                 rdfs:label "restricted_by" .
+
+
+###  http://example.org/ontology#satellite_of
+ex:satellite_of rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000124> ;
+                rdfs:domain ex:Node ;
+                rdfs:range ex:Junction ;
+                rdfs:label "satellite_of" .
+
+
+###  http://example.org/ontology#scheduled_in
+ex:scheduled_in rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf ex:others ;
+                rdfs:domain ex:Cost ;
+                rdfs:range ex:SorSchedule ;
+                rdfs:label "scheduled_in" .
+
+
+###  http://example.org/ontology#utilizes
+ex:utilizes rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000124> ;
+            rdfs:domain ex:ServiceProviderRegion ;
+            rdfs:range ex:Link ;
+            rdfs:label "utilizes" .
+
+
+###  http://purl.obolibrary.org/obo/BFO_0000054
+<http://purl.obolibrary.org/obo/BFO_0000054> rdf:type owl:ObjectProperty ;
+                                             rdfs:label "has realization" .
+
+
+###  http://purl.obolibrary.org/obo/BFO_0000055
+<http://purl.obolibrary.org/obo/BFO_0000055> rdf:type owl:ObjectProperty ;
+                                             rdfs:label "realizes" .
+
+
+###  http://purl.obolibrary.org/obo/BFO_0000056
+<http://purl.obolibrary.org/obo/BFO_0000056> rdf:type owl:ObjectProperty ;
+                                             rdfs:label "participates in" .
+
+
+###  http://purl.obolibrary.org/obo/BFO_0000057
+<http://purl.obolibrary.org/obo/BFO_0000057> rdf:type owl:ObjectProperty ;
+                                             rdfs:label "has participant" .
+
+
+###  http://purl.obolibrary.org/obo/BFO_0000062
+<http://purl.obolibrary.org/obo/BFO_0000062> rdf:type owl:ObjectProperty ;
+                                             rdfs:label "preceded by" .
+
+
+###  http://purl.obolibrary.org/obo/BFO_0000063
+<http://purl.obolibrary.org/obo/BFO_0000063> rdf:type owl:ObjectProperty ;
+                                             rdfs:label "precedes" .
+
+
+###  http://purl.obolibrary.org/obo/BFO_0000066
+<http://purl.obolibrary.org/obo/BFO_0000066> rdf:type owl:ObjectProperty ;
+                                             rdfs:label "occurs in" .
+
+
+###  http://purl.obolibrary.org/obo/BFO_0000117
+<http://purl.obolibrary.org/obo/BFO_0000117> rdf:type owl:ObjectProperty ;
+                                             rdfs:label "has occurrent part" .
+
+
+###  http://purl.obolibrary.org/obo/BFO_0000124
+<http://purl.obolibrary.org/obo/BFO_0000124> rdf:type owl:ObjectProperty ;
+                                             rdfs:label "location of" .
+
+
+###  http://purl.obolibrary.org/obo/BFO_0000132
+<http://purl.obolibrary.org/obo/BFO_0000132> rdf:type owl:ObjectProperty ;
+                                             rdfs:label "occurrent part of" .
+
+
+###  http://purl.obolibrary.org/obo/BFO_0000171
+<http://purl.obolibrary.org/obo/BFO_0000171> rdf:type owl:ObjectProperty ;
+                                             rdfs:label "located in" .
+
+
+###  http://purl.obolibrary.org/obo/BFO_0000176
+<http://purl.obolibrary.org/obo/BFO_0000176> rdf:type owl:ObjectProperty ;
+                                             rdfs:label "continuant part of" .
+
+
+###  http://purl.obolibrary.org/obo/BFO_0000178
+<http://purl.obolibrary.org/obo/BFO_0000178> rdf:type owl:ObjectProperty ;
+                                             rdfs:label "has continuant part" .
+
+
+###  http://purl.obolibrary.org/obo/BFO_0000183
+<http://purl.obolibrary.org/obo/BFO_0000183> rdf:type owl:ObjectProperty ;
+                                             rdfs:label "environs" .
+
+
+###  http://purl.obolibrary.org/obo/BFO_0000194
+<http://purl.obolibrary.org/obo/BFO_0000194> rdf:type owl:ObjectProperty ;
+                                             rdfs:label "depends on by" .
+
+
+###  http://purl.obolibrary.org/obo/BFO_0000199
+<http://purl.obolibrary.org/obo/BFO_0000199> rdf:type owl:ObjectProperty ;
+                                             rdfs:label "occupies temporal region" .
+
+
+###  http://purl.obolibrary.org/obo/BFO_000084
+<http://purl.obolibrary.org/obo/BFO_000084> rdf:type owl:ObjectProperty ;
+                                            rdfs:label "depends on" .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://example.org/ontology#Accessrestriction
+ex:Accessrestriction rdf:type owl:Class ;
+                     rdfs:subClassOf ex:TrafficRestriction ,
+                                     <http://purl.obolibrary.org/obo/BFO_0000031> ;
+                     ex:DataSource "NetworkModel:['Accessrestriction', 'Accessrestrictionexemption', 'Accessrestrictioninclusion', 'Dimaccessrestrictiontype'];" ;
+                     skos:definition "Specifications and types of access limits applied to points on a link, indicating which kinds of vehicles are exempt or included in those restrictions." .
+
+
+###  http://example.org/ontology#Activity
+ex:Activity rdf:type owl:Class ;
+            rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000015> .
+
+
+###  http://example.org/ontology#Alert
+ex:Alert rdf:type owl:Class ;
+         rdfs:subClassOf ex:Notification ,
+                         <http://purl.obolibrary.org/obo/BFO_0000031> ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty ex:indicates ;
+                           owl:someValuesFrom ex:Work
+                         ] ;
+         ex:DataSource "CONFIRM:['AlertType'];" ;
+         skos:definition "Includes notification mechanisms in place for asset management activities." .
+
+
+###  http://example.org/ontology#Asset
+ex:Asset rdf:type owl:Class ;
+         rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000040> ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty ex:depends_on_by ;
+                           owl:someValuesFrom ex:Cost
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty ex:is_located_in ;
+                           owl:someValuesFrom ex:Site
+                         ] ;
+         ex:DataSource "CONFIRM:['Feature', 'FeatureType', 'FeatureGroup', 'AssetSorCost', 'FeatAttribType', 'FeatCondGrade', 'FeatureDocument', 'AllocatedRegime'];DDMS:['AssetType', 'AssetOwnerType', 'AssetShapeType'];" ;
+         skos:definition "A system entity representing physical road assets such as signs, pavements, and public utilities that support the broader transportation network." .
+
+
+###  http://example.org/ontology#AssetDesignation
+ex:AssetDesignation rdf:type owl:Class ;
+                    rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000031> .
+
+
+###  http://example.org/ontology#AssetEnhancement
+ex:AssetEnhancement rdf:type owl:Class ;
+                    rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000031> .
+
+
+###  http://example.org/ontology#AssetScheme
+ex:AssetScheme rdf:type owl:Class ;
+               rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000141> .
+
+
+###  http://example.org/ontology#Carriageway
+ex:Carriageway rdf:type owl:Class ;
+               rdfs:subClassOf ex:Physical_Road_Segment ,
+                               <http://purl.obolibrary.org/obo/BFO_0000040> ;
+               ex:DataSource "NetworkModel:['Dimcarriagewaytype'];" ;
+               skos:definition "Types of carriageways that delineate the physical configuration of the road." .
+
+
+###  http://example.org/ontology#CommunicationDocument
+ex:CommunicationDocument rdf:type owl:Class ;
+                         rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000031> .
+
+
+###  http://example.org/ontology#ContactPoint
+ex:ContactPoint rdf:type owl:Class ;
+                rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000031> .
+
+
+###  http://example.org/ontology#ContinuousRepresentation
+ex:ContinuousRepresentation rdf:type owl:Class ;
+                            rdfs:subClassOf ex:GeometricRepresentation ,
+                                            <http://purl.obolibrary.org/obo/BFO_0000031> ;
+                            ex:DataSource "DDMS:['ContinuousAsset', 'LiningType', 'MaterialType', 'SurfaceMaterialType', 'OriginType', 'FlowControlType', 'PrecipitationType', 'TemperatureType'];" ;
+                            skos:definition "HE drainage continuous assets like pipes, filter drains, etc., and their attributes." .
+
+
+###  http://example.org/ontology#Contract
+ex:Contract rdf:type owl:Class ;
+            rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000031> ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty ex:has_relation_with ;
+                              owl:someValuesFrom ex:Cost
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty ex:managed_by ;
+                              owl:someValuesFrom ex:Gang
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty ex:none ;
+                              owl:someValuesFrom ex:Tax
+                            ] ;
+            ex:DataSource "CONFIRM:['Contract', 'Contractor', 'ContractArea', 'ContractBoq', 'ContractPf', 'ContractCoverage', 'ContractRegime', 'CtractWorkGroup', 'ContractPenalty', 'VariationHeader', 'VariationItem', 'BiddingContractor', 'ContractorOfficer', 'ContractorPf'];" ;
+            skos:definition "Represents contractual agreements for managing road assets, including areas, pricing, regimes, penalties, and associated personnel." .
+
+
+###  http://example.org/ontology#ContractualRoute
+ex:ContractualRoute rdf:type owl:Class ;
+                    rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000141> .
+
+
+###  http://example.org/ontology#Correspondence
+ex:Correspondence rdf:type owl:Class ;
+                  rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000015> ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty ex:none ;
+                                    owl:someValuesFrom ex:Work
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty ex:performed_on ;
+                                    owl:someValuesFrom ex:Site
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty ex:represents ;
+                                    owl:someValuesFrom ex:Letter
+                                  ] ;
+                  ex:DataSource "CONFIRM:['CorrespondLog', 'Correspond'];" ;
+                  skos:definition "Records communication exchanges related to the management and coordination of road assets." .
+
+
+###  http://example.org/ontology#Cost
+ex:Cost rdf:type owl:Class ;
+        rdfs:subClassOf ex:FinancialConsideration ,
+                        <http://purl.obolibrary.org/obo/BFO_0000031> ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty ex:related_to ;
+                          owl:someValuesFrom ex:Site
+                        ] ;
+        ex:DataSource "CONFIRM:['CostCode', 'CostcodeCategory'];" ;
+        skos:definition "Represents financial considerations associated with road asset management, including budget tracking and cost categorization." .
+
+
+###  http://example.org/ontology#CulvertAsset
+ex:CulvertAsset rdf:type owl:Class ;
+                rdfs:subClassOf ex:Asset ,
+                                <http://purl.obolibrary.org/obo/BFO_0000040> ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty ex:is_located_in ;
+                                  owl:someValuesFrom ex:Scheme
+                                ] ;
+                ex:DataSource "DDMS:['CulvertAsset'];" ;
+                skos:definition "HE drainage culvert assets." .
+
+
+###  http://example.org/ontology#DBFO
+ex:DBFO rdf:type owl:Class ;
+        rdfs:subClassOf ex:ContractualRoute ,
+                        <http://purl.obolibrary.org/obo/BFO_0000141> ;
+        ex:DataSource "NetworkModel:['Dimdbfo'];" ;
+        skos:definition "Routes within the National Highways that are part of Design Build Finance Operate contracts." .
+
+
+###  http://example.org/ontology#Defect
+ex:Defect rdf:type owl:Class ;
+          rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000031> ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty ex:associated_with ;
+                            owl:someValuesFrom ex:Organisation
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty ex:is_correlated_with ;
+                            owl:someValuesFrom ex:Asset
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty ex:none ;
+                            owl:someValuesFrom ex:Priority
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty ex:participates_in ;
+                            owl:someValuesFrom ex:Inspection
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty ex:participates_in ;
+                            owl:someValuesFrom ex:Job
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty ex:participates_in ;
+                            owl:someValuesFrom ex:Observation
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty ex:participates_in ;
+                            owl:someValuesFrom ex:Work
+                          ] ;
+          ex:DataSource "CONFIRM:['Defect', 'DefectAttribute', 'DefectCategory', 'DefectCategoryPriority', 'DefectType', 'DefectTypeObserveType', 'DefectTypeAttrib', 'DefectTypeSorGroup'];" ;
+          skos:definition "Concerns identified issues or damages found in road assets, classified by type, priority, attributes, and associated actions." .
+
+
+###  http://example.org/ontology#Designation
+ex:Designation rdf:type owl:Class ;
+               rdfs:subClassOf ex:AssetDesignation ,
+                               <http://purl.obolibrary.org/obo/BFO_0000031> ;
+               ex:DataSource "CONFIRM:['Designation', 'DesignationPeriod'];" ;
+               skos:definition "Focuses on different designations and their durations in asset management." .
+
+
+###  http://example.org/ontology#DirectionalData
+ex:DirectionalData rdf:type owl:Class ;
+                   rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000031> .
+
+
+###  http://example.org/ontology#Directionality
+ex:Directionality rdf:type owl:Class ;
+                  rdfs:subClassOf ex:DirectionalData ,
+                                  <http://purl.obolibrary.org/obo/BFO_0000031> ;
+                  ex:DataSource "NetworkModel:['Dimdirection', 'Dimdirectionality', 'Linkdirectionality'];" ;
+                  skos:definition "Details about direction-related data that inform traffic management systems regarding traffic flow directions on network links." .
+
+
+###  http://example.org/ontology#Enquiry
+ex:Enquiry rdf:type owl:Class ;
+           rdfs:subClassOf ex:Activity ,
+                           <http://purl.obolibrary.org/obo/BFO_0000015> ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty ex:assesses ;
+                             owl:someValuesFrom ex:Tax
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty ex:investigates ;
+                             owl:someValuesFrom ex:Defect
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty ex:leads_to ;
+                             owl:someValuesFrom ex:Contract
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty ex:none ;
+                             owl:someValuesFrom ex:Job
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty ex:performed_on ;
+                             owl:someValuesFrom ex:Gang
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty ex:performed_on ;
+                             owl:someValuesFrom ex:Site
+                           ] ;
+           ex:DataSource "CONFIRM:['Enquiry', 'CentralEnquiry', 'EnquiryClass', 'EnquiryCommitment', 'EnquiryCustomer', 'EnquiryCustLink', 'EnquiryAttribute', 'EnquiryStatus', 'EnquiryMethod', 'EnquirySubject', 'EnquiryStatusCommitment', 'EnquiryStatusLog'];" ;
+           skos:definition "Handles the inquiries and feedback from stakeholders regarding road asset operations." .
+
+
+###  http://example.org/ontology#Failure
+ex:Failure rdf:type owl:Class ;
+           rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000015> ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty ex:is_linked_to ;
+                             owl:someValuesFrom ex:Contract
+                           ] ;
+           ex:DataSource "CONFIRM:['FailureItem', 'FailureSeverity', 'FailureType'];" ;
+           skos:definition "Includes details on the failure events within road assets, categorized by type and severity." .
+
+
+###  http://example.org/ontology#Finance
+ex:Finance rdf:type owl:Class ;
+           rdfs:subClassOf ex:Temporal_interval ,
+                           <http://purl.obolibrary.org/obo/BFO_0000008> ;
+           ex:DataSource "CONFIRM:['FinanceYear', 'FinancePeriod', 'PeriodBudget'];" ;
+           skos:definition "Deals with the financial periodization and budget standards applicable to asset management operations." .
+
+
+###  http://example.org/ontology#FinancialConsideration
+ex:FinancialConsideration rdf:type owl:Class ;
+                          rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000031> .
+
+
+###  http://example.org/ontology#FloodHotspot
+ex:FloodHotspot rdf:type owl:Class ;
+                rdfs:subClassOf ex:FloodZone ,
+                                <http://purl.obolibrary.org/obo/BFO_0000141> ;
+                ex:DataSource "DDMS:['FloodHotspot', 'ChartSection'];" ;
+                skos:definition "Information on flood hotspots and their linkage to the network model." .
+
+
+###  http://example.org/ontology#FloodIncident
+ex:FloodIncident rdf:type owl:Class ;
+                 rdfs:subClassOf ex:Incident ,
+                                 <http://purl.obolibrary.org/obo/BFO_0000015> ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty ex:occurs_in ;
+                                   owl:someValuesFrom ex:FloodHotspot
+                                 ] ;
+                 ex:DataSource "DDMS:['FloodIncident'];" ;
+                 skos:definition "Stores flood incident information within the network." .
+
+
+###  http://example.org/ontology#FloodZone
+ex:FloodZone rdf:type owl:Class ;
+             rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000141> .
+
+
+###  http://example.org/ontology#Gang
+ex:Gang rdf:type owl:Class ;
+        rdfs:subClassOf ex:Workforce ,
+                        <http://purl.obolibrary.org/obo/BFO_0000040> ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty ex:none ;
+                          owl:someValuesFrom ex:Organisation
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty ex:participates_in ;
+                          owl:someValuesFrom ex:Work
+                        ] ;
+        ex:DataSource "CONFIRM:['Gang', 'GangAllocation', 'GangItem', 'GangJob'];" ;
+        skos:definition "Describes the workforce involved in executing job orders within the road asset management framework." .
+
+
+###  http://example.org/ontology#GeographicLocation
+ex:GeographicLocation rdf:type owl:Class ;
+                      rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000141> .
+
+
+###  http://example.org/ontology#GeometricRepresentation
+ex:GeometricRepresentation rdf:type owl:Class ;
+                           rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000031> .
+
+
+###  http://example.org/ontology#Hazard
+ex:Hazard rdf:type owl:Class ;
+          rdfs:subClassOf ex:HazardManagement ,
+                          <http://purl.obolibrary.org/obo/BFO_0000031> ;
+          ex:DataSource "CONFIRM:['HazardType', 'HazardTypeAttrib'];" ;
+          skos:definition "Addresses different hazardous conditions that might impact road asset safety." .
+
+
+###  http://example.org/ontology#HazardManagement
+ex:HazardManagement rdf:type owl:Class ;
+                    rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000031> .
+
+
+###  http://example.org/ontology#Impact
+ex:Impact rdf:type owl:Class ;
+          rdfs:subClassOf ex:ImpactAssessment ,
+                          <http://purl.obolibrary.org/obo/BFO_0000031> ;
+          ex:DataSource "CONFIRM:['Impact'];" ;
+          skos:definition "Pertains to effects or results related to road asset conditions or infrastructural changes." .
+
+
+###  http://example.org/ontology#ImpactAssessment
+ex:ImpactAssessment rdf:type owl:Class ;
+                    rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000031> .
+
+
+###  http://example.org/ontology#Incident
+ex:Incident rdf:type owl:Class ;
+            rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000015> .
+
+
+###  http://example.org/ontology#Inspection
+ex:Inspection rdf:type owl:Class ;
+              rdfs:subClassOf ex:Activity ,
+                              <http://purl.obolibrary.org/obo/BFO_0000015> ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty ex:conducts ;
+                                owl:someValuesFrom ex:InspectionType
+                              ] ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty ex:none ;
+                                owl:someValuesFrom ex:Work
+                              ] ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty ex:performed_on ;
+                                owl:someValuesFrom ex:Organisation
+                              ] ;
+              ex:DataSource "CONFIRM:['InspectionBatch', 'InspectionRoute', 'InspectionType', 'InspCondition', 'InspRouteFeat', 'InspectionFeature'];DDMS:['Inspection', 'InspectionType', 'InspectionMethodType', 'InspectionPurposeType'];" ;
+              skos:definition "Represents the systematic assessment of road assets to evaluate their condition and ensure compliance with maintenance standards." .
+
+
+###  http://example.org/ontology#InspectionType
+ex:InspectionType rdf:type owl:Class ;
+                  rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000031> ;
+                  ex:DataSource "CONFIRM:['InspectionType', 'InspectionTypeCondition'];" ;
+                  skos:definition "Defines different types of asset inspections and conditions." .
+
+
+###  http://example.org/ontology#Interest
+ex:Interest rdf:type owl:Class ;
+            rdfs:subClassOf ex:InterestManagement ,
+                            <http://purl.obolibrary.org/obo/BFO_0000031> ;
+            ex:DataSource "CONFIRM:['Interest'];" ;
+            skos:definition "Deals with interests related to asset management such as financial or operational." .
+
+
+###  http://example.org/ontology#InterestManagement
+ex:InterestManagement rdf:type owl:Class ;
+                      rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000031> .
+
+
+###  http://example.org/ontology#Intersection
+ex:Intersection rdf:type owl:Class ;
+                rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000141> .
+
+
+###  http://example.org/ontology#Job
+ex:Job rdf:type owl:Class ;
+       rdfs:subClassOf ex:Activity ,
+                       <http://purl.obolibrary.org/obo/BFO_0000015> ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty ex:addresses ;
+                         owl:someValuesFrom ex:Hazard
+                       ] ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty ex:establishes ;
+                         owl:someValuesFrom ex:Priority
+                       ] ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty ex:implements ;
+                         owl:someValuesFrom ex:MaintenanceRegime
+                       ] ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty ex:incurs ;
+                         owl:someValuesFrom ex:Cost
+                       ] ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty ex:performed_on ;
+                         owl:someValuesFrom ex:Asset
+                       ] ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty ex:realizes ;
+                         owl:someValuesFrom ex:Contract
+                       ] ;
+       ex:DataSource "CONFIRM:['Job', 'JobItem', 'JobType', 'JobStatus', 'JobStatusLog', 'JobPrecedent', 'JobCost', 'JobOrigin', 'JobAttribute'];" ;
+       skos:definition "Encompasses the activities and scheduling tasks related to caring for and repairing road assets." .
+
+
+###  http://example.org/ontology#Junction
+ex:Junction rdf:type owl:Class ;
+            rdfs:subClassOf ex:Intersection ,
+                            <http://purl.obolibrary.org/obo/BFO_0000141> ;
+            ex:DataSource "NetworkModel:['Junction', 'Dimjunctiontype', 'Nodejunction'];" ;
+            skos:definition "Areas where roads intersect, providing opportunities for vehicles to change directions and include various junction types." .
+
+
+###  http://example.org/ontology#Lane
+ex:Lane rdf:type owl:Class ;
+        rdfs:subClassOf ex:Physical_Road_Segment ,
+                        <http://purl.obolibrary.org/obo/BFO_0000040> ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty ex:is_located_in ;
+                          owl:someValuesFrom ex:Link
+                        ] ;
+        ex:DataSource "NetworkModel:['Lane', 'Dimlanetype', 'Speedlimit'];" ;
+        skos:definition "Segments of a roadway assigned for dedicated lines of vehicular movement, which also reflect applicable speed limits based on lane type and directionality." .
+
+
+###  http://example.org/ontology#Letter
+ex:Letter rdf:type owl:Class ;
+          rdfs:subClassOf ex:CommunicationDocument ,
+                          <http://purl.obolibrary.org/obo/BFO_0000031> ;
+          ex:DataSource "CONFIRM:['LetterType'];" ;
+          skos:definition "Deals with documented communication standardized across asset management processes." .
+
+
+###  http://example.org/ontology#Lining
+ex:Lining rdf:type owl:Class ;
+          rdfs:subClassOf ex:AssetEnhancement ,
+                          <http://purl.obolibrary.org/obo/BFO_0000031> ;
+          ex:DataSource "CONFIRM:['SmartAttribType', 'SmartDependValue', 'SmartAttribValue', 'FeatureDocument', 'AssetGroupSmartAttributeType'];" ;
+          skos:definition "Handles the additional information describing asset features or enhancements." .
+
+
+###  http://example.org/ontology#Link
+ex:Link rdf:type owl:Class ;
+        rdfs:subClassOf ex:NetworkElement ,
+                        <http://purl.obolibrary.org/obo/BFO_0000141> ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty ex: ;
+                          owl:someValuesFrom ex:LinkCategory
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty ex:depends_on_by ;
+                          owl:someValuesFrom ex:Directionality
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty ex:depends_on_by ;
+                          owl:someValuesFrom ex:Ownership
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty ex:dimension_of ;
+                          owl:someValuesFrom ex:Node
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty ex:exists_on ;
+                          owl:someValuesFrom ex:Carriageway
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty ex:relates_to ;
+                          owl:someValuesFrom ex:Location
+                        ] ;
+        ex:DataSource "NetworkModel:['Link', 'Dimlinktype', 'Linkaccessrestriction', 'Linkdbfo', 'Linknodevehiclerestriction', 'Linkroad', 'Linkserviceproviderarearegion', 'Linkstreet', 'Linkturnrestriction', 'Linkvehiclerestriction', 'Dimlinkcategory', 'Dimsmartmotorwaytype', 'Dimoperationalstate'];NTIS:['Link', 'Shapecomponent'];" ;
+        skos:definition "Logical subdivisions within the road network that are enriched with category types, operational states, associated restrictions, and service area designations." .
+
+
+###  http://example.org/ontology#LinkCategory
+ex:LinkCategory rdf:type owl:Class ;
+                rdfs:subClassOf ex:LinkManagement ,
+                                <http://purl.obolibrary.org/obo/BFO_0000031> ;
+                ex:DataSource "NetworkModel:['Dimlinkcategory'];" ;
+                skos:definition "Categorization types for links within the network, aiding in systematic classification and management." .
+
+
+###  http://example.org/ontology#LinkManagement
+ex:LinkManagement rdf:type owl:Class ;
+                  rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000031> .
+
+
+###  http://example.org/ontology#Locality
+ex:Locality rdf:type owl:Class ;
+            rdfs:subClassOf ex:GeographicLocation ,
+                            <http://purl.obolibrary.org/obo/BFO_0000141> ;
+            ex:DataSource "CONFIRM:['Locality', 'Town', 'County'];" ;
+            skos:definition "Addresses geographic localization details pertaining to road assets." .
+
+
+###  http://example.org/ontology#Location
+ex:Location rdf:type owl:Class ;
+            rdfs:subClassOf ex:GeographicLocation ,
+                            <http://purl.obolibrary.org/obo/BFO_0000141> ;
+            ex:DataSource "NTIS:['Measurementlocation'];" ;
+            skos:definition "Details the locations where measurements are taken, including any historical information tied to each location." .
+
+
+###  http://example.org/ontology#MaintenanceRegime
+ex:MaintenanceRegime rdf:type owl:Class ;
+                     rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000031> ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty ex:defines ;
+                                       owl:someValuesFrom ex:Priority
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty ex:none ;
+                                       owl:someValuesFrom ex:Cost
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty ex:none ;
+                                       owl:someValuesFrom ex:Hazard
+                                     ] ;
+                     ex:DataSource "CONFIRM:['MaintenanceRegime', 'RegimeApplic', 'RegimeItem', 'RegimePeriod', 'RegimeSmartValue'];" ;
+                     skos:definition "Concerns scheduled maintenance plans and their execution on roadways." .
+
+
+###  http://example.org/ontology#Material
+ex:Material rdf:type owl:Class ;
+            rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000040> ;
+            ex:DataSource "CONFIRM:['Material'];" ;
+            skos:definition "References materials used in construction, repair or maintenance of road assets." .
+
+
+###  http://example.org/ontology#Measurement
+ex:Measurement rdf:type owl:Class ;
+               rdfs:subClassOf ex:MeasurementData ,
+                               <http://purl.obolibrary.org/obo/BFO_0000031> ;
+               ex:DataSource "NTIS:['Measurementfeedtype', 'Measurementvalue', 'Measurementvalueerror', 'Measurementvalueindex', 'Unitofmeasurement'];" ;
+               skos:definition "Pertains to the various measurements taken at specific locations, including the types of measurements, their values, any errors observed, and the units of these measurements." .
+
+
+###  http://example.org/ontology#MeasurementData
+ex:MeasurementData rdf:type owl:Class ;
+                   rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000031> .
+
+
+###  http://example.org/ontology#MeasurementType
+ex:MeasurementType rdf:type owl:Class ;
+                   rdfs:subClassOf ex:MeasurementData ,
+                                   <http://purl.obolibrary.org/obo/BFO_0000031> ;
+                   ex:DataSource "NTIS:['Measurementvaluetype'];" ;
+                   skos:definition "Categorizes the various types of measurements captured, such as MIDAS flow, speed, occupancy, and headway." .
+
+
+###  http://example.org/ontology#MediaAssets
+ex:MediaAssets rdf:type owl:Class ;
+               rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000031> .
+
+
+###  http://example.org/ontology#NetworkElement
+ex:NetworkElement rdf:type owl:Class ;
+                  rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000141> .
+
+
+###  http://example.org/ontology#Node
+ex:Node rdf:type owl:Class ;
+        rdfs:subClassOf ex:NetworkElement ,
+                        <http://purl.obolibrary.org/obo/BFO_0000141> ;
+        ex:DataSource "NetworkModel:['Node', 'Dimnodetype'];NTIS:['Node'];" ;
+        skos:definition "Specific, generally fixed points that denote positions within the road network but carry no volume, connecting different links." .
+
+
+###  http://example.org/ontology#Notification
+ex:Notification rdf:type owl:Class ;
+                rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000031> .
+
+
+###  http://example.org/ontology#Observation
+ex:Observation rdf:type owl:Class ;
+               rdfs:subClassOf ex:Activity ,
+                               <http://purl.obolibrary.org/obo/BFO_0000015> ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty ex:assesses ;
+                                 owl:someValuesFrom ex:Impact
+                               ] ;
+               ex:DataSource "CONFIRM:['ObserveType', 'ObserveTypeAssetGroup', 'ObserveParameter', 'ObserveParmOpt'];" ;
+               skos:definition "Relates to the parameters of observation and understanding of asset status." .
+
+
+###  http://example.org/ontology#Organisation
+ex:Organisation rdf:type owl:Class ;
+                rdfs:subClassOf ex:Organisational_Structure ,
+                                <http://purl.obolibrary.org/obo/BFO_0000040> ;
+                ex:DataSource "CONFIRM:['Organisation', 'OrganiseGroup'];" ;
+                skos:definition "Refers to the various organisational structures involved in road asset management." .
+
+
+###  http://example.org/ontology#Organisational_Structure
+ex:Organisational_Structure rdf:type owl:Class ;
+                            rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000040> .
+
+
+###  http://example.org/ontology#OutfallAsset
+ex:OutfallAsset rdf:type owl:Class ;
+                rdfs:subClassOf ex:Asset ,
+                                <http://purl.obolibrary.org/obo/BFO_0000040> ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty ex:is_located_in ;
+                                  owl:someValuesFrom ex:Scheme
+                                ] ;
+                ex:DataSource "DDMS:['OutfallAsset'];" ;
+                skos:definition "HE outfalls point assets." .
+
+
+###  http://example.org/ontology#Ownership
+ex:Ownership rdf:type owl:Class ;
+             rdfs:subClassOf ex:LinkManagement ,
+                             <http://purl.obolibrary.org/obo/BFO_0000031> ;
+             ex:DataSource "NetworkModel:['Dimownership'];" ;
+             skos:definition "Represents who holds jurisdictional or possession rights over distinct link areas within the network." .
+
+
+###  http://example.org/ontology#Payment
+ex:Payment rdf:type owl:Class ;
+           rdfs:subClassOf ex:Activity ,
+                           <http://purl.obolibrary.org/obo/BFO_0000015> ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty ex:affects ;
+                             owl:someValuesFrom ex:Cost
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty ex:has_financial_requirement ;
+                             owl:someValuesFrom ex:Finance
+                           ] ;
+           ex:DataSource "CONFIRM:['PaymentJob', 'PaymentBatch', 'PaymentItem', 'PaymentCategory'];" ;
+           skos:definition "Addresses financial transactions, detailing payments associated with job execution." .
+
+
+###  http://example.org/ontology#Photo
+ex:Photo rdf:type owl:Class ;
+         rdfs:subClassOf ex:MediaAssets ,
+                         <http://purl.obolibrary.org/obo/BFO_0000031> ;
+         ex:DataSource "DDMS:['PhotoStorageType'];" ;
+         skos:definition "Details about photo storage types for asset monitoring purposes." .
+
+
+###  http://example.org/ontology#Physical_Road_Segment
+ex:Physical_Road_Segment rdf:type owl:Class ;
+                         rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000040> .
+
+
+###  http://example.org/ontology#PointOfContact
+ex:PointOfContact rdf:type owl:Class ;
+                  rdfs:subClassOf ex:ContactPoint ,
+                                  <http://purl.obolibrary.org/obo/BFO_0000031> ;
+                  ex:DataSource "CONFIRM:['PointOfContact'];" ;
+                  skos:definition "Contains the points of contact related to various enquiries and asset issues." .
+
+
+###  http://example.org/ontology#PointRepresentation
+ex:PointRepresentation rdf:type owl:Class ;
+                       rdfs:subClassOf ex:GeometricRepresentation ,
+                                       <http://purl.obolibrary.org/obo/BFO_0000031> ;
+                       ex:DataSource "DDMS:['PointAsset', 'PointShapeType', 'ManholeType', 'CoverDutyType', 'MaterialType', 'LiningType', 'OriginType', 'FlowControlType', 'PrecipitationType', 'TemperatureType'];" ;
+                       skos:definition "HE drainage point assets, including inlets, outlets, chambers, and their attributes." .
+
+
+###  http://example.org/ontology#Priority
+ex:Priority rdf:type owl:Class ;
+            rdfs:subClassOf ex:PriorityManagement ,
+                            <http://purl.obolibrary.org/obo/BFO_0000031> ;
+            ex:DataSource "CONFIRM:['Priority'];" ;
+            skos:definition "Describes priority ranking for different tasks involved in road asset management." .
+
+
+###  http://example.org/ontology#PriorityManagement
+ex:PriorityManagement rdf:type owl:Class ;
+                      rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000031> .
+
+
+###  http://example.org/ontology#RegionRepresentation
+ex:RegionRepresentation rdf:type owl:Class ;
+                        rdfs:subClassOf ex:GeometricRepresentation ,
+                                        <http://purl.obolibrary.org/obo/BFO_0000031> ;
+                        ex:DataSource "DDMS:['RegionAsset'];" ;
+                        skos:definition "HE drainage region assets such as ponds." .
+
+
+###  http://example.org/ontology#RiskAssessment
+ex:RiskAssessment rdf:type owl:Class ;
+                  rdfs:subClassOf ex:Activity ,
+                                  <http://purl.obolibrary.org/obo/BFO_0000015> ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty ex:none ;
+                                    owl:someValuesFrom ex:Job
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty ex:none ;
+                                    owl:someValuesFrom ex:Work
+                                  ] ;
+                  ex:DataSource "CONFIRM:['JobRiskAsses'];" ;
+                  skos:definition "Evaluates potential risks involved in executing asset management tasks." .
+
+
+###  http://example.org/ontology#Schedule
+ex:Schedule rdf:type owl:Class ;
+            rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000031> .
+
+
+###  http://example.org/ontology#Scheme
+ex:Scheme rdf:type owl:Class ;
+          rdfs:subClassOf ex:AssetScheme ,
+                          <http://purl.obolibrary.org/obo/BFO_0000141> ;
+          ex:DataSource "DDMS:['Scheme'];" ;
+          skos:definition "Schemes representing connected drainage asset sets." .
+
+
+###  http://example.org/ontology#Service
+ex:Service rdf:type owl:Class ;
+           rdfs:subClassOf ex:ServiceType ,
+                           <http://purl.obolibrary.org/obo/BFO_0000031> ;
+           ex:DataSource "CONFIRM:['TypeOfService'];" ;
+           skos:definition "Defines the types of services associated with inquiries and the maintenance of road assets." .
+
+
+###  http://example.org/ontology#ServiceProviderRegion
+ex:ServiceProviderRegion rdf:type owl:Class ;
+                         rdfs:subClassOf ex:ServiceRegion ,
+                                         <http://purl.obolibrary.org/obo/BFO_0000141> ;
+                         ex:DataSource "NetworkModel:['Dimserviceproviderarearegion'];" ;
+                         skos:definition "Mapping of regions being serviced by specific providers for maintenance or management tasks." .
+
+
+###  http://example.org/ontology#ServiceRegion
+ex:ServiceRegion rdf:type owl:Class ;
+                 rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000141> .
+
+
+###  http://example.org/ontology#ServiceType
+ex:ServiceType rdf:type owl:Class ;
+               rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000031> .
+
+
+###  http://example.org/ontology#Site
+ex:Site rdf:type owl:Class ;
+        rdfs:subClassOf ex:GeographicLocation ,
+                        <http://purl.obolibrary.org/obo/BFO_0000141> ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty ex:depends_on_by ;
+                          owl:someValuesFrom ex:Cost
+                        ] ;
+        ex:DataSource "CONFIRM:['Site', 'CentralSite', 'SiteClass', 'SiteGroup', 'SiteAssignment', 'SiteGroupStreetType', 'SiteInterest', 'SiteState', 'SiteSurface'];" ;
+        skos:definition "Specifically details the geographic and physical aspects of the locations managed under road asset management." .
+
+
+###  http://example.org/ontology#SoakawayAsset
+ex:SoakawayAsset rdf:type owl:Class ;
+                 rdfs:subClassOf ex:Asset ,
+                                 <http://purl.obolibrary.org/obo/BFO_0000040> ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty ex:included_in ;
+                                   owl:someValuesFrom ex:Scheme
+                                 ] ;
+                 ex:DataSource "DDMS:['SoakawayAsset'];" ;
+                 skos:definition "HE soakaway point assets." .
+
+
+###  http://example.org/ontology#SorSchedule
+ex:SorSchedule rdf:type owl:Class ;
+               rdfs:subClassOf ex:Schedule ,
+                               <http://purl.obolibrary.org/obo/BFO_0000031> ;
+               ex:DataSource "CONFIRM:['SorSchedule', 'SorGroup', 'SorGroupItem', 'SorItem'];" ;
+               skos:definition "Comprehends the structured schedules of rates concerning maintenance and repair." .
+
+
+###  http://example.org/ontology#SpillageIncident
+ex:SpillageIncident rdf:type owl:Class ;
+                    rdfs:subClassOf ex:Incident ,
+                                    <http://purl.obolibrary.org/obo/BFO_0000015> ;
+                    ex:DataSource "DDMS:['SpillageIncident'];" ;
+                    skos:definition "Stores information related to spillage incidents in the network." .
+
+
+###  http://example.org/ontology#Street
+ex:Street rdf:type owl:Class ;
+          rdfs:subClassOf ex:GeographicLocation ,
+                          <http://purl.obolibrary.org/obo/BFO_0000141> ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty ex:depends_on ;
+                            owl:someValuesFrom ex:Designation
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty ex:depends_on_by ;
+                            owl:someValuesFrom ex:LinkCategory
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty ex:governs ;
+                            owl:someValuesFrom ex:Organisation
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty ex:governs ;
+                            owl:someValuesFrom ex:Site
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty ex:is_located_in ;
+                            owl:someValuesFrom ex:Surface
+                          ] ;
+          ex:DataSource "CONFIRM:['StreetDesignation', 'StreetReinstate', 'StreetRecordType'];NetworkModel:['Street', 'Dimstreettype', 'Dimsurfacetype'];" ;
+          skos:definition "Relates to street-level categorization and restoration efforts in road asset management." .
+
+
+###  http://example.org/ontology#Surface
+ex:Surface rdf:type owl:Class ;
+           rdfs:subClassOf ex:Physical_Road_Segment ,
+                           <http://purl.obolibrary.org/obo/BFO_0000040> ;
+           ex:DataSource "NetworkModel:['Dimsurfacetype'];" ;
+           skos:definition "Different kinds of surfaces that a street can have, impacting the categorization of network sections." .
+
+
+###  http://example.org/ontology#Tax
+ex:Tax rdf:type owl:Class ;
+       rdfs:subClassOf ex:FinancialConsideration ,
+                       <http://purl.obolibrary.org/obo/BFO_0000031> ;
+       ex:DataSource "CONFIRM:['TaxStatus', 'TaxType'];" ;
+       skos:definition "Concerns with all tax regulations affecting asset management and contractor interactions." .
+
+
+###  http://example.org/ontology#Temporal_interval
+ex:Temporal_interval rdf:type owl:Class ;
+                     rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000008> .
+
+
+###  http://example.org/ontology#TimePeriod
+ex:TimePeriod rdf:type owl:Class ;
+              rdfs:subClassOf ex:Temporal_interval ,
+                              <http://purl.obolibrary.org/obo/BFO_0000008> ;
+              ex:DataSource "CONFIRM:['Week', 'Period'];" ;
+              skos:definition "Includes time-related categorization pertinent to asset management planning." .
+
+
+###  http://example.org/ontology#TrafficRestriction
+ex:TrafficRestriction rdf:type owl:Class ;
+                      rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000031> .
+
+
+###  http://example.org/ontology#Turnrestriction
+ex:Turnrestriction rdf:type owl:Class ;
+                   rdfs:subClassOf ex:TrafficRestriction ,
+                                   <http://purl.obolibrary.org/obo/BFO_0000031> ;
+                   ex:DataSource "NetworkModel:['Turnrestriction', 'Turnrestrictionexemption', 'Turnrestrictioninclusion', 'Dimturnrestrictiontype'];" ;
+                   skos:definition "Specifications that delineate which vehicular turns are authorized or prohibited at intersections and include exemption categories." .
+
+
+###  http://example.org/ontology#UnitOfMeasurement
+ex:UnitOfMeasurement rdf:type owl:Class ;
+                     rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000031> ;
+                     ex:DataSource "NetworkModel:['Unitofmeasurement'];" ;
+                     skos:definition "Conventions and abbreviations for units of measurement pertinent to network specifications." .
+
+
+###  http://example.org/ontology#VehicleAttribute
+ex:VehicleAttribute rdf:type owl:Class ;
+                    rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000031> .
+
+
+###  http://example.org/ontology#VehicleCharacteristic
+ex:VehicleCharacteristic rdf:type owl:Class ;
+                         rdfs:subClassOf ex:VehicleAttribute ,
+                                         <http://purl.obolibrary.org/obo/BFO_0000031> ;
+                         ex:DataSource "NTIS:['Vehiclecharacteristic'];" ;
+                         skos:definition "Comprises details regarding the attributes of vehicles, such as length, which may impact measurement and predefined locations." .
+
+
+###  http://example.org/ontology#VehicleRestriction
+ex:VehicleRestriction rdf:type owl:Class ;
+                      rdfs:subClassOf ex:TrafficRestriction ,
+                                      <http://purl.obolibrary.org/obo/BFO_0000031> ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty ex:none ;
+                                        owl:someValuesFrom ex:UnitOfMeasurement
+                                      ] ;
+                      ex:DataSource "NetworkModel:['Vehiclerestriction', 'Vehiclerestrictionexemption', 'Vehiclerestrictioninclusion', 'Dimvehiclerestrictiontype'];" ;
+                      skos:definition "Dictates limitations on vehicle dimensions or weights that access certain areas of the road network, including specific inclusion or exemption details." .
+
+
+###  http://example.org/ontology#Video
+ex:Video rdf:type owl:Class ;
+         rdfs:subClassOf ex:MediaAssets ,
+                         <http://purl.obolibrary.org/obo/BFO_0000031> ;
+         ex:DataSource "DDMS:['VideoStorageType', 'VideoTimingType'];" ;
+         skos:definition "Attributes related to video storage and timing for asset monitoring." .
+
+
+###  http://example.org/ontology#Work
+ex:Work rdf:type owl:Class ;
+        rdfs:subClassOf ex:Activity ,
+                        <http://purl.obolibrary.org/obo/BFO_0000015> ;
+        ex:DataSource "CONFIRM:['WorkGroup', 'Workstream', 'WorkCategory', 'WorkType', 'WorkBand', 'WorkContractor'];" ;
+        skos:definition "Spans the categorization of work efforts on road assets, including types and associated contractors." .
+
+
+###  http://example.org/ontology#Workforce
+ex:Workforce rdf:type owl:Class ;
+             rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000040> .
+
+
+###  http://purl.obolibrary.org/obo/BFO_0000008
+<http://purl.obolibrary.org/obo/BFO_0000008> rdf:type owl:Class ;
+                                             rdfs:label "Temporal region" .
+
+
+###  http://purl.obolibrary.org/obo/BFO_0000015
+<http://purl.obolibrary.org/obo/BFO_0000015> rdf:type owl:Class ;
+                                             rdfs:label "Process" .
+
+
+###  http://purl.obolibrary.org/obo/BFO_0000031
+<http://purl.obolibrary.org/obo/BFO_0000031> rdf:type owl:Class ;
+                                             rdfs:label "Dependent continuant" .
+
+
+###  http://purl.obolibrary.org/obo/BFO_0000040
+<http://purl.obolibrary.org/obo/BFO_0000040> rdf:type owl:Class ;
+                                             rdfs:label "Material entity" .
+
+
+###  http://purl.obolibrary.org/obo/BFO_0000141
+<http://purl.obolibrary.org/obo/BFO_0000141> rdf:type owl:Class ;
+                                             rdfs:label "Immaterial entity" .
+
+
+###  Generated by the OWL API (version 4.5.25.2023-02-15T19:15:49Z) https://github.com/owlcs/owlapi

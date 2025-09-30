@@ -1,0 +1,64 @@
+[
+    {
+        "TableName": "Link",
+        "Description": "Contains the Link information of the PredefinedLocations. d2lm:predefinedLocationContainer._id=\"NTIS_Network_Links\"",
+        "ReferenceTablesViaForeignKey": [
+            "Measurementlocation",
+            "Node"
+        ]
+    },
+    {
+        "TableName": "Measurementfeedtype",
+        "Description": "Reference table that contains the different types of measurements (MIDAS, TMU,TAME,…)",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "Measurementlocation",
+        "Description": "Contains the location information where the different measurements are taken. Historic information for each LocationUID is also stored",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "Measurementvalue",
+        "Description": "Contains the measurements values taken every 1 minute. For MIDAS, the measurements are reported on a per lane basis. The possible values are:",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "Measurementvalueerror",
+        "Description": "Contains the error information for the invalid measurements",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "Measurementvalueindex",
+        "Description": "Contains the lane information of the measurements taken",
+        "ReferenceTablesViaForeignKey": [
+            "Node"
+        ]
+    },
+    {
+        "TableName": "Measurementvaluetype",
+        "Description": "Reference table that contains the different types of measurements: * MIDAS: flow, speed, occupancy, and headway",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "Node",
+        "Description": "Contains the Node information of the PredefinedLocations. d2lm:predefinedLocationContainer._id=\"NTIS_Network_Nodes\"",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "Shapecomponent",
+        "Description": "Contains the Shape information of the PredefinedLocations. Filter: d2lm:predefinedLocationContainer._id=\"NTIS_Network_Links\"",
+        "ReferenceTablesViaForeignKey": [
+            "Link"
+        ]
+    },
+    {
+        "TableName": "Unitofmeasurement",
+        "Description": "Contains the different Units of Measures description for the measurements taken.Flow: \"vehicles per hour\"",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "Vehiclecharacteristic",
+        "Description": "Contains the vehicle characteristics about its length",
+        "ReferenceTablesViaForeignKey": []
+    }
+]

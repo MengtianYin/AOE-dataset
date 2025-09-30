@@ -1,0 +1,1419 @@
+[
+    {
+        "TableName": "ActionOfficer",
+        "Description": "Contains the information of the existing officers responsible for the inspections",
+        "ReferenceTablesViaForeignKey": [
+            "UserLogin",
+            "WorkGroup",
+            "Organisation",
+            "DataKey",
+            "OfficerLocation"
+        ]
+    },
+    {
+        "TableName": "AlertType",
+        "Description": "Contains the different types of alerts",
+        "ReferenceTablesViaForeignKey": [
+            "UserLogin",
+            "FollowUp",
+            "Commitment"
+        ]
+    },
+    {
+        "TableName": "AllocatedRegime",
+        "Description": "Link table between Asset and MaintenanceRegime tables",
+        "ReferenceTablesViaForeignKey": [
+            "Feature",
+            "MaintenanceRegime",
+            "Contract",
+            "ActionOfficer",
+            "Job",
+            "CostCode"
+        ]
+    },
+    {
+        "TableName": "Feature",
+        "Description": "Contains the HE asset information, from Confirm \"feature\" table.Assets can be identified by combining the SiteID and the PlotNumber or using the CentralAssetID.",
+        "ReferenceTablesViaForeignKey": [
+            "Site",
+            "CostCode",
+            "ContractArea",
+            "Ward",
+            "Area",
+            "Customer",
+            "FeatureType",
+            "SiteClass"
+        ]
+    },
+    {
+        "TableName": "FeatAttribType",
+        "Description": "Link table between the assets and its attributes",
+        "ReferenceTablesViaForeignKey": [
+            "AttributeValue"
+        ]
+    },
+    {
+        "TableName": "FeatCondGrade",
+        "Description": "Table storing the asset condition",
+        "ReferenceTablesViaForeignKey": [
+            "Feature",
+            "ObserveType"
+        ]
+    },
+    {
+        "TableName": "EntityHistory",
+        "Description": "Link between assets and the date types",
+        "ReferenceTablesViaForeignKey": [
+            "Feature",
+            "SmartAttribType"
+        ]
+    },
+    {
+        "TableName": "FeatureDocument",
+        "Description": "Contains the location of the documents of an asset",
+        "ReferenceTablesViaForeignKey": [
+            "Feature"
+        ]
+    },
+    {
+        "TableName": "FeatureGroup",
+        "Description": "HE groups of assets, coming from ADMM. Features have a type, and types may have a different group",
+        "ReferenceTablesViaForeignKey": [
+            "SiteGroup",
+            "ContractArea",
+            "Customer"
+        ]
+    },
+    {
+        "TableName": "AssetGroupActionOfficer",
+        "Description": "Link table between AssetGroup and ActionOfficer tables",
+        "ReferenceTablesViaForeignKey": [
+            "FeatureGroup",
+            "ActionOfficer"
+        ]
+    },
+    {
+        "TableName": "AssetGroupAttributeType",
+        "Description": "Link table between the asset groups and the types of attributes",
+        "ReferenceTablesViaForeignKey": [
+            "AttributeType",
+            "FeatureGroup"
+        ]
+    },
+    {
+        "TableName": "AssetGroupMeasurementType",
+        "Description": "Link table between the asset groups and the types of measurements",
+        "ReferenceTablesViaForeignKey": [
+            "FeatureGroup",
+            "MeasurementType"
+        ]
+    },
+    {
+        "TableName": "AssetGroupSmartAttributeType",
+        "Description": "Link table between the asset groups and the smart attributes",
+        "ReferenceTablesViaForeignKey": [
+            "SmartAttribType",
+            "FeatureGroup"
+        ]
+    },
+    {
+        "TableName": "EntityHistory",
+        "Description": "Link table between the assets and its measurements",
+        "ReferenceTablesViaForeignKey": [
+            "Feature",
+            "SmartAttribType"
+        ]
+    },
+    {
+        "TableName": "EntityHistory",
+        "Description": "Link table between the assets and the smart attributes",
+        "ReferenceTablesViaForeignKey": [
+            "Feature",
+            "SmartAttribType"
+        ]
+    },
+    {
+        "TableName": "AssetSorCost",
+        "Description": "Reference table between Asset, SorSchedule and CostCode tables. It contains the cost of each sor schedule per asset",
+        "ReferenceTablesViaForeignKey": [
+            "Feature",
+            "SorSchedule",
+            "CostCode"
+        ]
+    },
+    {
+        "TableName": "FeatureType",
+        "Description": "HE types of assets, coming from ADMM",
+        "ReferenceTablesViaForeignKey": [
+            "FeatureGroup"
+        ]
+    },
+    {
+        "TableName": "AttributeType",
+        "Description": "Reference table with the attributes linked to the assets",
+        "ReferenceTablesViaForeignKey": [
+            "UnitOfMeasure"
+        ]
+    },
+    {
+        "TableName": "AttributeValue",
+        "Description": "Contains the meaning of the value of a specific attribute",
+        "ReferenceTablesViaForeignKey": [
+            "AttributeType"
+        ]
+    },
+    {
+        "TableName": "BiddingContractor",
+        "Description": "Link table between Contract and Contractor tables",
+        "ReferenceTablesViaForeignKey": [
+            "Contract",
+            "Contractor"
+        ]
+    },
+    {
+        "TableName": "CentralEnquiry",
+        "Description": "Contains the HE enquiries information. Enquiries can be compliments, claims, incidents, notifications or notices performed by customers, local authorities or HE employees",
+        "ReferenceTablesViaForeignKey": [
+            "EnquirySubject",
+            "EnquiryClass",
+            "Site",
+            "UserLogin",
+            "ActionOfficer",
+            "EnquiryStatus",
+            "FollowUp"
+        ]
+    },
+    {
+        "TableName": "CentralSite",
+        "Description": "Site information. It refers to \"central_site\" table from Confirm",
+        "ReferenceTablesViaForeignKey": [
+            "Area",
+            "Ward",
+            "Locality",
+            "StreetRecordType",
+            "Organisation",
+            "SiteState",
+            "SiteSurface"
+        ]
+    },
+    {
+        "TableName": "CommentEnquiryStatus",
+        "Description": "Link between CommentLibrary and EnquiryStatus tables",
+        "ReferenceTablesViaForeignKey": [
+            "CommentLibrary",
+            "EnquiryStatus"
+        ]
+    },
+    {
+        "TableName": "CommentJobStatus",
+        "Description": "Reference table with comments about the job status",
+        "ReferenceTablesViaForeignKey": [
+            "CommentLibrary",
+            "JobStatus"
+        ]
+    },
+    {
+        "TableName": "CommentLibrary",
+        "Description": "Reference table with comments about the job status",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "Commitment",
+        "Description": "Contains the type of commitments",
+        "ReferenceTablesViaForeignKey": [
+            "FollowUp"
+        ]
+    },
+    {
+        "TableName": "ConstructionType",
+        "Description": "Reference table with the possible construction types",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "Contact",
+        "Description": "Reference table with the contact information. Only the name is available in DaaS",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "Contract",
+        "Description": "Contains the contracts' information",
+        "ReferenceTablesViaForeignKey": [
+            "Contractor",
+            "CostCode",
+            "WorkCategory",
+            "ClaimClass"
+        ]
+    },
+    {
+        "TableName": "ContractArea",
+        "Description": "Reference table with the different HE contract areas",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "ContractAreaGroup",
+        "Description": "Reference table between Contract and AreaGroup table",
+        "ReferenceTablesViaForeignKey": [
+            "ContractArea",
+            "WorkGroup"
+        ]
+    },
+    {
+        "TableName": "ContractBoq",
+        "Description": "Contains the bill of quantities information by joining ContractPriceFactor and SorItem tables",
+        "ReferenceTablesViaForeignKey": [
+            "ContractPf",
+            "SorItem"
+        ]
+    },
+    {
+        "TableName": "ContractCoverage",
+        "Description": "Reference table between Contract and ContractAreas",
+        "ReferenceTablesViaForeignKey": [
+            "Contract",
+            "ContractArea"
+        ]
+    },
+    {
+        "TableName": "FailureItem",
+        "Description": "Contains the actual contract failures within HE",
+        "ReferenceTablesViaForeignKey": [
+            "ContractPenalty"
+        ]
+    },
+    {
+        "TableName": "ContractPenalty",
+        "Description": "Link table between Contract and FailureType tables. It is known as contract_penalty in Confirm",
+        "ReferenceTablesViaForeignKey": [
+            "Contract",
+            "FailureType"
+        ]
+    },
+    {
+        "TableName": "Contractor",
+        "Description": "Contains the existing contractors information",
+        "ReferenceTablesViaForeignKey": [
+            "Gang",
+            "Contact",
+            "TaxStatus"
+        ]
+    },
+    {
+        "TableName": "CtractorItemCost",
+        "Description": "Reference table between ContractorPriceFactor and ContractBoq tables. It contains the cost of each item per contractor",
+        "ReferenceTablesViaForeignKey": [
+            "ContractorPf",
+            "ContractBoq"
+        ]
+    },
+    {
+        "TableName": "ContractorOfficer",
+        "Description": "Link table between Contractor and ActionOfficer tables",
+        "ReferenceTablesViaForeignKey": [
+            "Contractor",
+            "ActionOfficer"
+        ]
+    },
+    {
+        "TableName": "ContractorPf",
+        "Description": "Link table between Contractor and PriceFactor tables",
+        "ReferenceTablesViaForeignKey": [
+            "BiddingContractor",
+            "ContractPf"
+        ]
+    },
+    {
+        "TableName": "ContractPf",
+        "Description": "Link table between Contract and PriceFactor tables",
+        "ReferenceTablesViaForeignKey": [
+            "Contract",
+            "PriceFactor"
+        ]
+    },
+    {
+        "TableName": "ContractRegime",
+        "Description": "Link table between Contract and MaintenanceRegime tables",
+        "ReferenceTablesViaForeignKey": [
+            "Contract",
+            "MaintenanceRegime"
+        ]
+    },
+    {
+        "TableName": "CtractWorkGroup",
+        "Description": "Reference table between Contract and WorkGroup table",
+        "ReferenceTablesViaForeignKey": [
+            "Contract",
+            "WorkGroup"
+        ]
+    },
+    {
+        "TableName": "CorrespondLog",
+        "Description": "Reference table containing the correspondence log",
+        "ReferenceTablesViaForeignKey": [
+            "LetterType",
+            "Correspond",
+            "UserLogin",
+            "CentralEnquiry"
+        ]
+    },
+    {
+        "TableName": "Correspond",
+        "Description": "Reference table containing the different types of correspondence used in HE",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "CostCode",
+        "Description": "Reference table with the different types of costs",
+        "ReferenceTablesViaForeignKey": [
+            "ContractArea",
+            "Site",
+            "Customer",
+            "CostcodeCategory"
+        ]
+    },
+    {
+        "TableName": "CostcodeCategory",
+        "Description": "Reference table with the different types of costs' categories",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "VariationHeader",
+        "Description": "Contains the general information of the variation of the job costs",
+        "ReferenceTablesViaForeignKey": [
+            "Contract",
+            "ContractArea",
+            "WorkType",
+            "UserLogin"
+        ]
+    },
+    {
+        "TableName": "VariationItem",
+        "Description": "Contains the variation info between the expected and the actual cost of a job item",
+        "ReferenceTablesViaForeignKey": [
+            "VariationJob",
+            "CostCode",
+            "SorItem",
+            "MeasurementType"
+        ]
+    },
+    {
+        "TableName": "VariationJob",
+        "Description": "Contains the variation info between the expected and the actual cost of a job",
+        "ReferenceTablesViaForeignKey": [
+            "VariationHeader"
+        ]
+    },
+    {
+        "TableName": "Customer",
+        "Description": "Reference table with the different customers, in general HE itself.",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "CustomerType",
+        "Description": "Reference table with the different types of customers",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "DataKey",
+        "Description": "Contains HE group users, used to organise the data and areas",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "DateType",
+        "Description": "Reference table containing the different types of dates",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "Defect",
+        "Description": "Contains the assets' defect information",
+        "ReferenceTablesViaForeignKey": [
+            "InspectionBatch",
+            "Feature",
+            "ActionOfficer",
+            "DefectType",
+            "Job",
+            "Organisation",
+            "Priority",
+            "ObserveType"
+        ]
+    },
+    {
+        "TableName": "DefectAttribute",
+        "Description": "Reference table with the attributes associated to defects",
+        "ReferenceTablesViaForeignKey": [
+            "Defect",
+            "ParameterType",
+            "ParameterValue"
+        ]
+    },
+    {
+        "TableName": "DefectCategory",
+        "Description": "Reference table with the categories associated to defects",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "DefectCategoryPriority",
+        "Description": "Link table between DefectCategory and Priority tables",
+        "ReferenceTablesViaForeignKey": [
+            "DefectCategory",
+            "SiteClass",
+            "Priority"
+        ]
+    },
+    {
+        "TableName": "DefectType",
+        "Description": "Reference table with the different types of defects",
+        "ReferenceTablesViaForeignKey": [
+            "JobType",
+            "DefectCategory"
+        ]
+    },
+    {
+        "TableName": "DefectTypeObserveType",
+        "Description": "Link table between DefectType and ObserveType tables",
+        "ReferenceTablesViaForeignKey": [
+            "DefectType",
+            "ObserveType"
+        ]
+    },
+    {
+        "TableName": "DefectTypeAttrib",
+        "Description": "Link table between DefectType and ParameterType tables",
+        "ReferenceTablesViaForeignKey": [
+            "DefectType",
+            "ParameterType"
+        ]
+    },
+    {
+        "TableName": "DefectTypeSorGroup",
+        "Description": "Link table between DefectType and SorGroup tables",
+        "ReferenceTablesViaForeignKey": [
+            "DefectType",
+            "SorGroup"
+        ]
+    },
+    {
+        "TableName": "Area",
+        "Description": "Reference table with the HE depots. In Confirm, it is known as \"area\"",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "Designation",
+        "Description": "Reference table containing the different designations",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "DesignationPeriod",
+        "Description": "Reference table containing the different types of designation periods",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "Enquiry",
+        "Description": "Contains detailed information about the enquiries.",
+        "ReferenceTablesViaForeignKey": [
+            "CentralEnquiry",
+            "Site",
+            "Job",
+            "Contract",
+            "Defect",
+            "Contractor"
+        ]
+    },
+    {
+        "TableName": "EnquiryClass",
+        "Description": "Contains the different enquiry classification",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "EnquiryCommitment",
+        "Description": "Contains the customer commitments related to claims enquiries",
+        "ReferenceTablesViaForeignKey": [
+            "CentralEnquiry",
+            "Commitment",
+            "EnquiryCustomer",
+            "UserLogin"
+        ]
+    },
+    {
+        "TableName": "EnquiryCustomer",
+        "Description": "Contains the the information of the customer that raised the enquiry",
+        "ReferenceTablesViaForeignKey": [
+            "UserLogin",
+            "CustomerType",
+            "EnquiryMethod",
+            "PointOfContact"
+        ]
+    },
+    {
+        "TableName": "EnquiryCustLink",
+        "Description": "Link between CentralEnquiry, EnquiryCustomer and CorrespondenceLog tables",
+        "ReferenceTablesViaForeignKey": [
+            "EnquiryCustomer",
+            "CentralEnquiry"
+        ]
+    },
+    {
+        "TableName": "EnquiryMethod",
+        "Description": "Reference table with the different enquiry methods",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "EnquiryAttribute",
+        "Description": "Link table between CentralEnquiry and ParameterValue tables",
+        "ReferenceTablesViaForeignKey": [
+            "CentralEnquiry",
+            "ParameterValue"
+        ]
+    },
+    {
+        "TableName": "EnquiryStatus",
+        "Description": "Reference table with the different enquiry status",
+        "ReferenceTablesViaForeignKey": [
+            "FollowUp"
+        ]
+    },
+    {
+        "TableName": "EnquiryStatusCommitment",
+        "Description": "Link between EnquiryStatus and Commitment tables",
+        "ReferenceTablesViaForeignKey": [
+            "EnquiryStatus",
+            "Commitment"
+        ]
+    },
+    {
+        "TableName": "EnquiryStatusLog",
+        "Description": "Contains the different status logged for an enquiry",
+        "ReferenceTablesViaForeignKey": [
+            "CentralEnquiry",
+            "UserLogin",
+            "ActionOfficer",
+            "EnquiryStatus",
+            "FollowUp"
+        ]
+    },
+    {
+        "TableName": "EnquirySubject",
+        "Description": "Contains the enquiry subject information",
+        "ReferenceTablesViaForeignKey": [
+            "TypeOfService",
+            "ActionOfficer",
+            "EnquiryStatus",
+            "EnquiryClass",
+            "SubjCategory",
+            "FollowUp",
+            "DataKey",
+            "Contract",
+            "Priority",
+            "CostCode",
+            "SorGroup",
+            "WorkType",
+            "JobType"
+        ]
+    },
+    {
+        "TableName": "SubjCategory",
+        "Description": "Reference table with the categories of the enquiry subjects",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "SubjectCommitment",
+        "Description": "Link between EnquirySubject and Commitment tables",
+        "ReferenceTablesViaForeignKey": [
+            "EnquirySubject",
+            "Commitment",
+            "FollowUp",
+            "EnquiryStatus"
+        ]
+    },
+    {
+        "TableName": "SubjectAttribute",
+        "Description": "Link between EnquirySubject and ParameterType tables",
+        "ReferenceTablesViaForeignKey": [
+            "EnquirySubject",
+            "ParameterType"
+        ]
+    },
+    {
+        "TableName": "FailureSeverity",
+        "Description": "Reference table containing the different types of severities of a failure",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "FailureType",
+        "Description": "Reference table containing the different types of failures of a contract",
+        "ReferenceTablesViaForeignKey": [
+            "FailureSeverity"
+        ]
+    },
+    {
+        "TableName": "FinancePeriod",
+        "Description": "Reference table with the different finance periods, per year",
+        "ReferenceTablesViaForeignKey": [
+            "Period",
+            "FinanceYear"
+        ]
+    },
+    {
+        "TableName": "PeriodBudget",
+        "Description": "Link table between FinancePeriod and CostCode tables",
+        "ReferenceTablesViaForeignKey": [
+            "FinancePeriod",
+            "CostCode"
+        ]
+    },
+    {
+        "TableName": "FinanceYear",
+        "Description": "Reference table with the different financial years",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "FollowUp",
+        "Description": "Reference table containing the existing types of follow up",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "Gang",
+        "Description": "Contains the information about the people doing the jobs",
+        "ReferenceTablesViaForeignKey": [
+            "ActionOfficer"
+        ]
+    },
+    {
+        "TableName": "GangAllocation",
+        "Description": "Link table between Gang, Site and SorItem tables",
+        "ReferenceTablesViaForeignKey": [
+            "Site",
+            "SorItem",
+            "Gang"
+        ]
+    },
+    {
+        "TableName": "GangItem",
+        "Description": "Contains information about the job assigned to the gang",
+        "ReferenceTablesViaForeignKey": [
+            "GangJob"
+        ]
+    },
+    {
+        "TableName": "GangJob",
+        "Description": "Link table between Gang and GangItem tables",
+        "ReferenceTablesViaForeignKey": [
+            "Gang"
+        ]
+    },
+    {
+        "TableName": "GroupDateType",
+        "Description": "Link between asset groups and the date types",
+        "ReferenceTablesViaForeignKey": [
+            "FeatureGroup",
+            "DateType"
+        ]
+    },
+    {
+        "TableName": "HazardTypeAttrib",
+        "Description": "Link table between HazardType and ParameterType tables",
+        "ReferenceTablesViaForeignKey": [
+            "HazardType",
+            "ParameterType"
+        ]
+    },
+    {
+        "TableName": "HazardType",
+        "Description": "Reference table with the different types of hazards",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "Impact",
+        "Description": "Contains the different impact types",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "InspectionFeature",
+        "Description": "Link table between the Asset and InspectionBatch tables",
+        "ReferenceTablesViaForeignKey": [
+            "InspectionBatch",
+            "Feature",
+            "ActionOfficer"
+        ]
+    },
+    {
+        "TableName": "InspectionBatch",
+        "Description": "Main inspections table containing the basic information of each inspection",
+        "ReferenceTablesViaForeignKey": [
+            "InspectionRoute",
+            "ActionOfficer"
+        ]
+    },
+    {
+        "TableName": "InspCondition",
+        "Description": "Table storing the asset condition's inspections",
+        "ReferenceTablesViaForeignKey": [
+            "InspectionFeature",
+            "ObserveType"
+        ]
+    },
+    {
+        "TableName": "InspectionRoute",
+        "Description": "Contains information of route inspections",
+        "ReferenceTablesViaForeignKey": [
+            "WorkGroup",
+            "InspectionType"
+        ]
+    },
+    {
+        "TableName": "InspRouteFeat",
+        "Description": "Link table between InspectionRoute and Asset tables",
+        "ReferenceTablesViaForeignKey": [
+            "InspectionRoute",
+            "Feature",
+            "ActionOfficer"
+        ]
+    },
+    {
+        "TableName": "InspectionType",
+        "Description": "Reference table containing the existing different types of inspections within HE",
+        "ReferenceTablesViaForeignKey": [
+            "FollowUp"
+        ]
+    },
+    {
+        "TableName": "InspectionTypeCondition",
+        "Description": "Link table between the InspectionType and ObserveType tables",
+        "ReferenceTablesViaForeignKey": [
+            "InspectionType",
+            "ObserveType"
+        ]
+    },
+    {
+        "TableName": "Interest",
+        "Description": "Reference table containing the different types of interest",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "Job",
+        "Description": "Contains the jobs' information",
+        "ReferenceTablesViaForeignKey": [
+            "Feature",
+            "CostCode",
+            "Customer",
+            "Contract",
+            "PriceFactor",
+            "Priority",
+            "ContractArea",
+            "JobType",
+            "TrafficManage",
+            "HazardType",
+            "MaintenanceRegime",
+            "Workstream"
+        ]
+    },
+    {
+        "TableName": "ClaimClass",
+        "Description": "Reference table with the different types of job claim classsifications",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "ClaimHeader",
+        "Description": "Contains the general information of the claim of the job costs",
+        "ReferenceTablesViaForeignKey": [
+            "Contract",
+            "ContractArea",
+            "ActionOfficer",
+            "ClaimClass"
+        ]
+    },
+    {
+        "TableName": "ClaimItem",
+        "Description": "Contains the claimed cost of the job item",
+        "ReferenceTablesViaForeignKey": [
+            "ClaimJob",
+            "SorItem",
+            "CostCode"
+        ]
+    },
+    {
+        "TableName": "ClaimJob",
+        "Description": "Contains the claimed cost of the job",
+        "ReferenceTablesViaForeignKey": [
+            "ClaimHeader",
+            "OrderJob",
+            "PriceFactor"
+        ]
+    },
+    {
+        "TableName": "ClaimStatus",
+        "Description": "Contains the current status of a claim",
+        "ReferenceTablesViaForeignKey": [
+            "FollowUp"
+        ]
+    },
+    {
+        "TableName": "ClaimStatusLog",
+        "Description": "Contains all the status assigned to a single job claim",
+        "ReferenceTablesViaForeignKey": [
+            "ClaimHeader",
+            "ClaimStatus",
+            "UserLogin"
+        ]
+    },
+    {
+        "TableName": "JobItem",
+        "Description": "Link table between Job and SorItem tables",
+        "ReferenceTablesViaForeignKey": [
+            "Job",
+            "SorItem",
+            "CostCode",
+            "MeasurementType"
+        ]
+    },
+    {
+        "TableName": "JobOrigin",
+        "Description": "Table containing the origin of the jobs info",
+        "ReferenceTablesViaForeignKey": [
+            "Job"
+        ]
+    },
+    {
+        "TableName": "JobAttribute",
+        "Description": "Link table between Job and ParameterValue tables",
+        "ReferenceTablesViaForeignKey": [
+            "Job",
+            "ParameterType",
+            "ParameterValue"
+        ]
+    },
+    {
+        "TableName": "PaymentJob",
+        "Description": "Contains information about the payment of a job",
+        "ReferenceTablesViaForeignKey": [
+            "OrderJob",
+            "FinancePeriod",
+            "PriceFactor",
+            "CostCode"
+        ]
+    },
+    {
+        "TableName": "PaymentBatch",
+        "Description": "Contains information about the payments' batch",
+        "ReferenceTablesViaForeignKey": [
+            "Contract",
+            "ContractArea",
+            "FinancePeriod",
+            "UserLogin"
+        ]
+    },
+    {
+        "TableName": "PaymentItem",
+        "Description": "Contains information about the payment of a job item",
+        "ReferenceTablesViaForeignKey": [
+            "PaymentJob",
+            "SorItem",
+            "CostCode"
+        ]
+    },
+    {
+        "TableName": "JobPrecedent",
+        "Description": "Table containing the precedent job info",
+        "ReferenceTablesViaForeignKey": [
+            "Job"
+        ]
+    },
+    {
+        "TableName": "JobStatus",
+        "Description": "Contains the existing status to assign to jobs",
+        "ReferenceTablesViaForeignKey": [
+            "FollowUp",
+            "EnquiryStatus",
+            "DataKey"
+        ]
+    },
+    {
+        "TableName": "JobStatusLog",
+        "Description": "Contains all the status assigned to a single job",
+        "ReferenceTablesViaForeignKey": [
+            "Job",
+            "ActionOfficer",
+            "JobStatus",
+            "FollowUp",
+            "UserLogin"
+        ]
+    },
+    {
+        "TableName": "JobCost",
+        "Description": "Contains the transactions done for jobs",
+        "ReferenceTablesViaForeignKey": [
+            "Job",
+            "Contractor",
+            "UserLogin",
+            "ClaimItem"
+        ]
+    },
+    {
+        "TableName": "JobType",
+        "Description": "Reference table with the different types of jobs",
+        "ReferenceTablesViaForeignKey": [
+            "TrafficManage",
+            "HazardType"
+        ]
+    },
+    {
+        "TableName": "LetterType",
+        "Description": "Contains the different types of letters",
+        "ReferenceTablesViaForeignKey": [
+            "Correspond"
+        ]
+    },
+    {
+        "TableName": "County",
+        "Description": "Local autorities' information",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "Locality",
+        "Description": "Localities' information",
+        "ReferenceTablesViaForeignKey": [
+            "Town"
+        ]
+    },
+    {
+        "TableName": "MaintenanceRegime",
+        "Description": "Contains the different maintenance regimes, related to jobs and assets",
+        "ReferenceTablesViaForeignKey": [
+            "FeatureType",
+            "JobType",
+            "FollowUp",
+            "Priority",
+            "CostCode"
+        ]
+    },
+    {
+        "TableName": "Material",
+        "Description": "Contains all the materials information",
+        "ReferenceTablesViaForeignKey": [
+            "UnitOfMeasure",
+            "DataKey"
+        ]
+    },
+    {
+        "TableName": "MeasurementType",
+        "Description": "Reference table with the possible types of measurements",
+        "ReferenceTablesViaForeignKey": [
+            "UnitOfMeasure"
+        ]
+    },
+    {
+        "TableName": "MonitoringBatch",
+        "Description": "Contains the job monitoring batch info",
+        "ReferenceTablesViaForeignKey": [
+            "Contract",
+            "ContractArea",
+            "ActionOfficer"
+        ]
+    },
+    {
+        "TableName": "MonitoringItem",
+        "Description": "Contains the job monitoring activities",
+        "ReferenceTablesViaForeignKey": [
+            "MonitoringBatch",
+            "OrderJob",
+            "InspectionBatch",
+            "Feature"
+        ]
+    },
+    {
+        "TableName": "ObserveParameter",
+        "Description": "Reference table with the parameters linked to the observe type",
+        "ReferenceTablesViaForeignKey": [
+            "UnitOfMeasure"
+        ]
+    },
+    {
+        "TableName": "ObserveParmOpt",
+        "Description": "Reference table with the options of the observe parameter",
+        "ReferenceTablesViaForeignKey": [
+            "ObserveParameter"
+        ]
+    },
+    {
+        "TableName": "ObserveType",
+        "Description": "Information about observations done in the assets and jobs. It can be about asset condition, defects, and inspections",
+        "ReferenceTablesViaForeignKey": [
+            "ObserveParameter",
+            "Impact"
+        ]
+    },
+    {
+        "TableName": "ObserveTypeAssetGroup",
+        "Description": "Link table between the ObserveType and the AssetGroup tables",
+        "ReferenceTablesViaForeignKey": [
+            "ObserveType",
+            "FeatureGroup"
+        ]
+    },
+    {
+        "TableName": "OfficerLocation",
+        "Description": "Contains the location of the Action Officers",
+        "ReferenceTablesViaForeignKey": [
+            "ActionOfficer"
+        ]
+    },
+    {
+        "TableName": "OrderHeader",
+        "Description": "Contains the general information present in all the order types",
+        "ReferenceTablesViaForeignKey": [
+            "Contract",
+            "ContractArea",
+            "WorkType",
+            "UserLogin",
+            "Contractor"
+        ]
+    },
+    {
+        "TableName": "OrderItem",
+        "Description": "Information of the order item, which relates to an order job",
+        "ReferenceTablesViaForeignKey": [
+            "OrderJob",
+            "SorItem",
+            "MeasurementType",
+            "CostCode"
+        ]
+    },
+    {
+        "TableName": "OrderJob",
+        "Description": "Information of the order of a job",
+        "ReferenceTablesViaForeignKey": [
+            "OrderHeader",
+            "PriceFactor",
+            "Customer",
+            "CostCode"
+        ]
+    },
+    {
+        "TableName": "Organisation",
+        "Description": "Information about the organisations involved in the assets and jobs",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "OrganiseGroup",
+        "Description": "Information about the group of the organisations involved in the assets and jobs",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "ParameterCategory",
+        "Description": "Reference table containing the different parameter categories",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "ParameterType",
+        "Description": "Reference table containing the different parameter types",
+        "ReferenceTablesViaForeignKey": [
+            "ParameterCategory"
+        ]
+    },
+    {
+        "TableName": "ParameterValue",
+        "Description": "Reference table containing the different parameter values",
+        "ReferenceTablesViaForeignKey": [
+            "ParameterType"
+        ]
+    },
+    {
+        "TableName": "PaymentCategory",
+        "Description": "Reference table with the different payment categories",
+        "ReferenceTablesViaForeignKey": [
+            "TaxType"
+        ]
+    },
+    {
+        "TableName": "Period",
+        "Description": "Reference table with the different periods used in HE",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "PointOfContact",
+        "Description": "Contains the point of contact related to EnquiryCustomer table",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "PriceFactor",
+        "Description": "Reference table with the different factor influencing prices (seasonal, weekend,�)",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "Priority",
+        "Description": "Reference table with the different types of priorities",
+        "ReferenceTablesViaForeignKey": [
+            "JobStatus",
+            "PriceFactor",
+            "FollowUp"
+        ]
+    },
+    {
+        "TableName": "RegimeApplic",
+        "Description": "Contains information about the maintenance regime application",
+        "ReferenceTablesViaForeignKey": [
+            "MaintenanceRegime",
+            "FeatureType",
+            "SiteClass"
+        ]
+    },
+    {
+        "TableName": "RegimeItem",
+        "Description": "Link table between MaintenanceRegime and SorItem tables",
+        "ReferenceTablesViaForeignKey": [
+            "MaintenanceRegime",
+            "SorItem",
+            "MeasurementType"
+        ]
+    },
+    {
+        "TableName": "RegimePeriod",
+        "Description": "Link table between MaintenanceRegime, Period and SorItem tables",
+        "ReferenceTablesViaForeignKey": [
+            "MaintenanceRegime",
+            "SorItem",
+            "Period"
+        ]
+    },
+    {
+        "TableName": "RegimeSmartValue",
+        "Description": "Link table between MaintenanceRegime and SmartAttributeValue tables",
+        "ReferenceTablesViaForeignKey": [
+            "SmartAttribValue",
+            "MaintenanceRegime"
+        ]
+    },
+    {
+        "TableName": "Reinstatement",
+        "Description": "Reference table with the possible reinstatement types",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "JobRiskAsses",
+        "Description": "Table containing the risk assessments of jobs",
+        "ReferenceTablesViaForeignKey": [
+            "Job",
+            "UserLogin"
+        ]
+    },
+    {
+        "TableName": "Ward",
+        "Description": "HE maintenance routes' information",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "TypeOfService",
+        "Description": "Reference table with the different types of service associated with an enquiry",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "Site",
+        "Description": "Site information. It refers to \"site\" table from Confirm",
+        "ReferenceTablesViaForeignKey": [
+            "SiteClass",
+            "ContractArea",
+            "Customer",
+            "CostCode"
+        ]
+    },
+    {
+        "TableName": "SiteAssignment",
+        "Description": "Contains the site assignments",
+        "ReferenceTablesViaForeignKey": [
+            "Site"
+        ]
+    },
+    {
+        "TableName": "SiteClass",
+        "Description": "Contains the different classifications of the sites",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "SiteGroup",
+        "Description": "Contains the different possible site groups",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "SiteGroupStreetType",
+        "Description": "Link table between SiteGroup and StreetType tables",
+        "ReferenceTablesViaForeignKey": [
+            "SiteGroup",
+            "StreetRecordType"
+        ]
+    },
+    {
+        "TableName": "SiteInterest",
+        "Description": "Link table between Site and Interest tables",
+        "ReferenceTablesViaForeignKey": [
+            "Site",
+            "Organisation",
+            "Interest",
+            "SiteClass"
+        ]
+    },
+    {
+        "TableName": "SiteState",
+        "Description": "Contains the different possible status of the sites",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "SiteSurface",
+        "Description": "Contains the different possible surfaces of the sites",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "SmartAttribType",
+        "Description": "Smart attributes associated to assets",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "SmartDependValue",
+        "Description": "Link between the smart attribute types and its values",
+        "ReferenceTablesViaForeignKey": [
+            "SmartAttribType",
+            "SmartAttribValue"
+        ]
+    },
+    {
+        "TableName": "SmartAttribValue",
+        "Description": "Smart attribute values associated to assets",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "SorGroup",
+        "Description": "Contains the schedule of rate groups",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "SorGroupItem",
+        "Description": "Link table between SorGroup and SorItem tables",
+        "ReferenceTablesViaForeignKey": [
+            "SorGroup"
+        ]
+    },
+    {
+        "TableName": "SorItem",
+        "Description": "Contains the schedule of rate items",
+        "ReferenceTablesViaForeignKey": [
+            "SorSchedule",
+            "UnitOfMeasure",
+            "FollowUp",
+            "PaymentCategory"
+        ]
+    },
+    {
+        "TableName": "SorSchedule",
+        "Description": "Contains the schedule of the SoR",
+        "ReferenceTablesViaForeignKey": [
+            "WorkCategory"
+        ]
+    },
+    {
+        "TableName": "StreetDesignation",
+        "Description": "Link table between Site and Designation tables",
+        "ReferenceTablesViaForeignKey": [
+            "Site",
+            "Designation",
+            "DesignationPeriod",
+            "Organisation"
+        ]
+    },
+    {
+        "TableName": "StreetReinstate",
+        "Description": "Link table between Site and Reinstatement tables",
+        "ReferenceTablesViaForeignKey": [
+            "Site",
+            "Reinstatement",
+            "ConstructionType",
+            "Organisation"
+        ]
+    },
+    {
+        "TableName": "StreetRecordType",
+        "Description": "Contains the different types of streets",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "TaxStatus",
+        "Description": "Reference table with the different tax status",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "TaxType",
+        "Description": "Reference table with the different tax types",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "Town",
+        "Description": "Towns' information",
+        "ReferenceTablesViaForeignKey": [
+            "County"
+        ]
+    },
+    {
+        "TableName": "TrafficManage",
+        "Description": "Reference table with the different traffic management",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "UnitOfMeasure",
+        "Description": "Contains the different unit of measurements used in Confirm.",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "UserGroup",
+        "Description": "UserGroup table with Confirm user groups details",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "UserLogin",
+        "Description": "UserLogin table with Confirm login details",
+        "ReferenceTablesViaForeignKey": [
+            "UserGroup",
+            "WorkGroup"
+        ]
+    },
+    {
+        "TableName": "Week",
+        "Description": "Reference table with the different weeks in a year",
+        "ReferenceTablesViaForeignKey": [
+            "Period"
+        ]
+    },
+    {
+        "TableName": "WorkBand",
+        "Description": "Reference table with the different works' categories (surface, corrosion,�)",
+        "ReferenceTablesViaForeignKey": [
+            "WorkCategory"
+        ]
+    },
+    {
+        "TableName": "WorkContractor",
+        "Description": "Link table between WorkBand and Contractor tables",
+        "ReferenceTablesViaForeignKey": [
+            "WorkBand",
+            "Contractor"
+        ]
+    },
+    {
+        "TableName": "WorkCategory",
+        "Description": "Reference table with the different works' categories (surface, corrosion,�)",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "WorkGroup",
+        "Description": "Contains information about the work groups",
+        "ReferenceTablesViaForeignKey": []
+    },
+    {
+        "TableName": "Workstream",
+        "Description": "Reference table with the different HE workstream",
+        "ReferenceTablesViaForeignKey": [
+            "Contractor"
+        ]
+    },
+    {
+        "TableName": "WorkType",
+        "Description": "Reference table with the different types of works (cyclic, reactive,�)",
+        "ReferenceTablesViaForeignKey": []
+    }
+]
