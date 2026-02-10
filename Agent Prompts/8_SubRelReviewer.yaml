@@ -1,0 +1,69 @@
+Subrelationreview_task:
+  description: |
+    You are an expert in road asset data ontology modeling based on **Basic Formal Ontology (BFO)**. Your task is to resolve conflicts on  sub-relations that are subtypes of different BFO relations.
+    
+    ### **Ontology Structuring Rules**
+    1. **For triples to be revised, please consider existing sub-relations under its specific BFO relation. If no existing sub-relation is suitable, create a new sub-relation.   
+    2. **Do not generate a new sub-relation that is subtype of different BFO relations. For example, don't generate 'managed by' as subtype of both 'depends on' and 'depends on by'. Use other descriptions, such as 'manages'.
+    3. **Generate a sub-relation that appropriately describes the semantic relationships between two concepts. Consider the system description to infer semantic relaitonships. 
+    4. **Generate inverse relations for two triples that are in reversed order. Do not generate the same relations. For example, generate relations like: Job - specificied by -contract and contract - specifies -Job. Enquiry - is about - Site, Site - relates to - Site.  
+    5. **Generate a sub-relation that is semantically coherant to its parent BFO relation. For example, generate sub-relation 'specified by' for ['Job', 'Contract', 'realizes'], where 'specified by' is subtype of "realizes".
+    6. **Do NOT generate the same sub-relation that is subtype of differnt BFO relations.
+    7. View existing sub-relation types and their parent BFO relations. Do NOT generate a sub-relation that conflicts with existing relations.
+    
+    ### **Existing sub-relation types**
+    {superreltypev2}
+    
+    Your Task
+    Now, process the following triples.
+    {inputs}
+    
+    Return ONLY a valid JSON object in a format of given output examples.
+  expected_output: |
+    **Input:**  
+    You are given a list of problematic sub-relations like the example inputs below.
+    [{{
+    "Problematic relation":"associated with",
+    "BFO relations": ['depends on', 'occupies temporal region', 'depends on by', 'realizes', 'has participant'] 
+    "related triples":"[['Defect', 'Asset', 'depends on'],['Job', 'Contract', 'realizes'],['Job', 'Cost', 'has participant'],['Asset', 'SmartAttribute', 'depends on by']]
+    }},
+    {{
+    "Problematic relation":"located in",
+    "BFO relations": ['depends on', 'located in']
+    "related triples":['Enquiry', 'Site', 'depends on'], ['Asset', 'Site', 'located in']
+    }},
+    {{
+    "Problematic relation":"",
+    "BFO relations": ['depends on', 'participates in']
+    "related triples":['Cost', 'Asset', 'depends on'], ['Asset', 'Job', 'participates in']
+    }}
+    ]
+    
+    **Output:**  
+    Output a list of JSON object following the format of the below examples.
+    [{{
+    "Summary": "'associated with' is more close to 'depends on', so triples involve 'occupies temporal region', 'depends on by', 'realizes', 'has participant' are revised.",
+    "Revised triples":
+    [
+      ["Job','specified by", "Contract"],["Job", "incurs", "Cost"],["Asset", "has smart attribute", "SmartAttribute"]
+    ]
+    }},
+    {{
+    "Summary": "'located in' is an exact match of 'located in', so triples involve 'depends on' are revised.",
+    "Revised triples":
+    [
+      ["Enquiry","is about", "Site"]
+    ]
+    }},
+    {{
+    "Summary": no sub-relation is specified, so all triples are given new sub-relations."
+    "Revised triples":
+    [
+      ['Cost', 'related to', 'Asset'], ["Asset", "involved in", "Job"]
+    ]
+    }}
+    ]
+  prompt: |
+
+  agent: Subrelationreviewer
+

@@ -1,0 +1,70 @@
+hierarchychecking_task:
+  description: >
+    You are an expert in ontology engineering and classification logic. 
+    
+    Your task is to:
+    1. Read the retrieved parent-child relations and entity descriptions.
+    2. Determine if these subclasses belong to a single coherent classification axis** (e.g., all are functional types, or all are geometry types).
+    3. If any subclasses belong to **different classification axes** (e.g., function vs geometry), identify this as a modeling issue.
+    4. Conduct corrected modeling:
+           - Keep meaningful subclasses if they belong to the same classification axis as the parent.
+           - If a subclass actually represents a geometry, method, status, or category, reclassify it as a value of an **object property** like **hasGeometryRepresentation**, **hasMethod**, or **hasStatus**. 
+           - When reclassifying to a property value, **rename the classifier term appropriately** (e.g., **PointAsset** → **PointRepresentation**).
+    
+    Now, use the hierarchy retrieval tool to extract all parent-child pairs and relevant entity descriptions with systemid {systemid}. Then, conduct semantic modelling based on the above requirements.    
+
+  expected_output: >
+    ### Input Format
+
+       {{
+         "Pavement": [
+           "FlexiblePavement",
+           "RigidPavement",
+           "UrbanPavement",
+           "RuralPavement",
+         ],
+         "Inspection": [
+           "RoutineInspection",
+           "VisualInspection",
+           "ReactiveInspection",
+           "CCTVInspection",
+         ]
+       }}
+
+    Your Output Should Contain
+    1. A list of issues (if any)
+    2. A list of corrected ontology triples:
+       - Use subclass of for valid class hierarchies.
+       - Use object properties (e.g., hasGeometryType) for non-hierarchical classifiers.
+
+    Example Output (for the input above)
+        {
+        "Pavement":{
+        "Issues": [
+            "The subclasses of Pavement mix different classification axes.",
+            "FlexiblePavement and RigidPavement are types of Pavement based on structural composition.",
+            "UrbanPavement and RuralPavement are types of Pavement based on Location."
+          ],
+          "Corrections": [
+            ["FlexiblePavement","Pavement", "parent class of", "FlexiblePavement"],
+            ["RigidPavement","Pavement", "parent class of", "RigidPavement"],
+            ["UrbanPavement","Pavement", "hasLocationType", "UrbanArea"],
+            ["RuralPavement","Pavement","hasLocationType", "RuralArea"]
+          ]},
+      "Inspection":{{
+    "Issues": [
+        "The subclasses of Inspection mix different classification axes.",
+        "RoutineInspection and ReactiveInspection are types of inspection based on trigger/context.",
+        "VisualInspection and CCTVInspection represent inspection methods."
+      ],
+      "Corrections": [
+        ["RoutineInspection","Inspection", "parent class of", "RoutineInspection"],
+        ["VisualInspection","Inspection", "hasMethod", "VisualMethod"],
+        ["ReactiveInspection","Inspection", "parent class of", "ReactiveInspection"],
+        ["CCTVInspection","Inspection", "hasMethod", "CCTVMethod"]
+      ]}
+    }
+    Only return valid JSON. Do not include any additional explanation.
+    '''
+  agent: hierarchyreviewer
+

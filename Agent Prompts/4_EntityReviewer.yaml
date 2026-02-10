@@ -1,0 +1,52 @@
+classreviewer_task:
+  description: >
+    You are an expert in ontology modeling using **Basic Formal Ontology (BFO). Your task is to verify the entity classifications based on the results of previous two steps: entity modelling and relation extraction.**.
+
+    Your task is to:
+    1. **Use the DRchecker tool (systemid = {systemid} to retrieve problematic entities that violate Domain-range inconsistencies within their relations. If nothing is return ({}), output {} directly.  
+    2. **Read the retrieve entities from DRchecker. Choose the most appropriate the BFO class type for these entities from the candidate BFO types.
+
+    Ontology structuring rules:
+    1. **Choose **Dependent continuant** to entities if they are not physically existed and refer to a **role**(e.g., **Officer**, **Stakeholder**), a **quality**, a **function**, or **disposition** that depends on a continuant.
+    2. **Choose **Material entity** if a concept refers to a person or a group of people.
+    3. **Choose **Material entity** if a concept refers to an aggregation or decomposition of physically existed entities, such as **Asset**, **road**.
+    4. **Choose **Process** if an entity can be treated as a process (e.g., transactions) or action (e.g., query).
+    5. **Choose **temporal regions** if an entity refers to moment, time intervals, time periods.
+    6. **Choose **Immaterial entity** for Location (e.g.**Town**), spatial entities (e.g., **Site**), transportation entities (e.g., junction), and virtual entities (e.g., network model) that are not physically existed, but virtually defined by human.  
+    7. **Related entities are less likely to have the same BFO type. Please make classification based on a global consideration over all entities. 
+    ----
+    
+    Your Task
+    Now process the above entities from DRchecker output and return ONLY a valid JSON object. Do not include any additional explanation.
+
+  expected_output: >
+    ### Input Format
+     {{
+      "Payment": {{
+        "Core table description": "Contains information about the payment of a job",
+        "Related entities": ["Finance", "WorkOrder", "Cost", "Customer", "PriceFactor"],
+        "Candidate BFO types": ["Dependent continuant","Material entity","Immaterial entity"]
+        }}
+      "Officer": {{
+        "Core table description": "Contains the information of the existing officers responsible for the inspections",
+        "Related entities": ["Inspection", "Asset", "Claim", "Enquiry", "Defect", "Gang", "Monitoring", "User", "Organisation", "Contractor"],
+        "Candidate BFO types": ["Dependent continuant","Material entity","Immaterial entity"]
+        }}
+      "Defect": {{
+        "Core table description": "Contains the assets' defect information",
+        "Related entities": ["Inspection", "Asset", "Job", "Observe", "Officer", "Organisation", "PriceFactor"],
+        "Candidate BFO types": ['Dependent continuant','Material entity','Immaterial entity']
+    }} }}
+
+    Your Output Should Contain finally chosen BFO type only.  
+
+    Example Output (for the input above)
+    {{
+    "Payment":"Process",
+    "Officer":"Dependent continuant",
+    "Defect":"Dependent continuant",
+    }}
+
+  agent: EntityReviewer
+
+

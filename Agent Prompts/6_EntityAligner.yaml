@@ -1,0 +1,132 @@
+entityalignment_task:
+  description: >
+    You are an expert in road asset data ontology modeling based on **Basic Formal Ontology (BFO)**. Your task is to align entities extracted from different systems.
+    Your task is to:
+    1. **Use the entitymerging tool (systemid = {systemid} to merge entities from different systems.
+    2. **If there are inconsistent entities returned, activate classrevieweragent to determine the class type of the problematic entities.
+
+  expected_output: > 
+    inconsistent entities from entitymerging tool.
+  agent: entityaligner
+
+classreviewer_task:
+  description: >
+    You are an expert in ontology modeling using **Basic Formal Ontology (BFO). Your task is to receive inconsistent entities from entityaligner and review these entities classifications**.
+
+    Your task is to:
+    2. **Read the retrieved entities. Choose the most appropriate the BFO class type for these entities from the candidate BFO types.
+
+    Ontology structuring rules:
+    1. **Choose **Dependent continuant** to entities if they are not physically existed and refer to a **role**(e.g., **Officer**, **Stakeholder**), a **quality**, a **function**, or **disposition** that depends on a continuant.
+    2. **Choose **Material entity** if a concept refers to a person or a group of people.
+    3. **Choose **Material entity** if a concept refers to an aggregation or decomposition of physically existed entities, such as **Asset**, **road**.
+    4. **Choose **Process** if an entity can be treated as a process (e.g., transactions) or action (e.g., query).
+    5. **Choose **temporal regions** if an entity refers to moment, time intervals, time periods.
+    6. **Choose **Immaterial entity** for Location (e.g.**Town**), spatial entities (e.g., **Site**), transportation entities (e.g., junction), and virtual entities (e.g., network model) that are not physically existed, but virtually defined by human.  
+    7. **Related entities are less likely to have the same BFO type. Please make classification based on a global consideration over all entities. 
+    ----
+    
+    Your Task
+    Now process the above entities from entityaligner output and return ONLY a valid JSON object. Output only inference results for the given input from entityaligner. Do NOT output examples.
+
+  expected_output: >
+    ### Input Format
+     {{
+      "Payment": {{
+        "Entity description": "Contains information about the payment of a job",
+        "Candidate BFO types": ["Dependent continuant","Material entity","Immaterial entity"]
+        }}
+      "Officer": {{
+        "Entity description": "Contains the information of the existing officers responsible for the inspections",
+        "Candidate BFO types": ["Dependent continuant","Material entity","Immaterial entity"]
+        }}
+      "Defect": {{
+        "Core table description": "Contains the assets' defect information",
+        "Candidate BFO types": ['Dependent continuant','Material entity','Immaterial entity']
+    }} }}
+
+    Your Output Should Contain finally chosen BFO type only. 
+
+    Example Output (for the input above)
+    {{
+    "Payment":"Process",
+    "Officer":"Dependent continuant",
+    "Defect":"Dependent continuant",
+    }}
+
+  agent: classrevieweragent
+
+relationreviewer_task:
+  description: >
+    You are an expert in road asset data ontology modeling based on **Basic Formal Ontology (BFO)**. Your task is to receive the output from classrevieweragent and correct relation classifications according to **BFO object properties**.
+    
+    Your task is to:
+    1. **Use the relconsistencychecker tool (entities = {classrevieweragent.output} to retrieve problematic relations. 
+    2. **Read the retrieved problematic relations. Choose the most appropriate the BFO relation type ONLY from the candidate BFO relations.
+    3. Output only the predictions for the received problematic relations.
+    
+    Below is a list of all relevant **BFO relationships**, along with their **domains**, and **ranges**:
+        | **BFO Relationship** |**Domain** | **Range** | 
+        |----------------------|---------------|-----------|
+        | **occurs in** | Process | Independent Continuant | 
+        | **environs** | Independent Continuant | Process | 
+        | **has participant** | Process | Continuant |
+        | **participates in** | Continuant | Process | 
+        | ** depends on** | Dependent Continuant | Independent Continuant | 
+        | ** depends on by** | Independent Continuant | Dependent Continuant |
+        | **realizes** | Process | Dependent Continuant | 
+        | **has realization** | Dependent Continuant | Process | 
+        | **preceded by** | Occurrent | Occurrent | 
+        | **precedes** | Occurrent | Occurrent | 
+        | **has continuant part** | Continuant | Continuant | 
+        | **has occurrent part** | Occurrent | Occurrent |
+        | **continuant part of** | Continuant | Continuant | 
+        | **occurrent part of** | Occurrent | Occurrent |
+        | **located in** | Independent continuant | Independent continuant | 
+        | **location of** | Independent continuant | Independent continuant | 
+        | **occupies temporal region** | Process | Temporal Region |
+    
+    Ontology modelling rules:
+        1. ** realizes / has realization **  are used when a process brings about the manifestation of a realizable entity (dependent continuant), including roles, dispositions, functions, etc. For example, inspection realizes role, traffic operation realizes road ability, regular maintenance realizes yearly work plan, etc.  
+        2. ** participates in / has participant **  are used when a continuant is involved in a process. For example, an enquiry has participants of a defect, officer, asset, site or a contract.    
+        2. ** occurs in/environs ** are used when a **process** occurs within a **material entity** or a **Immaterial entity**. It often refers to a process occurring in a space. For example, a work occurs in a site.
+        4. ** if two processes have apparent order based on their meanings (e.g., follow up activities), use **precedes / preceded by**. If two processes don't have apparent order, use ** none**  instead. 
+        5. ** located in **  refers to a continuant is placed in some locations, like ** asset, located in, site** . In comparison, ** location of**  means location of a continuant, like ** site, location of, asset ** . 
+        6. **Always generate inverse relationships when applicable**:
+           - Example: `["Asset", "located in", "Site"]` → Automatically generate `["Site", "location of ", "Asset"]`.
+        7. If a dependent continuant is a realizable entity (role, functions, dispositions) caused by a process, choose ** realizes / has realization ** relation with a **process** entity. If  If a dependent continuant is a quality or measurement, choose ** participates in / has participant ** relation with a **process** entity.
+        8. If a process occurs inside the spatial regions of a continuant, choose **environs/occurs in**. If a process doesn't occurs inside the spatial regions of a continuant, choose **participates in/has participant**. For example, an inspection activity cannot occur within the spatial region of an asset, so inspection has participant of an asset.
+        9. Choose **location of** if the first immaterial entity (e.g., City) has larger scale and contains the second immaterial entity (Site). For example, City - location of - Site, Site - located at - City.
+        10. Choose **located at** when an immaterial entity (e.g., road) is contained in a network model (link, node). For example, road - located at - link. link - location of - road. 
+        11. Choose **none** if the semantic relation between two independent continuants are out of scope. For example, link - none - node, because the relation 'connected to' is not covered in BFO relations.
+    
+    The input includes [head entity, tail entity, candidate BFO relations, hints]. 
+        ### Example Input Format
+        [
+        ["Gang (Material entity)","Officer (Dependent continuant)", ['depends on by', 'has continuant part', ''],
+        ["Site (Immaterial entity)","Asset (Material entity)", ['has continuant part', 'continuant part of', 'located in', 'location of'],'if asset is physically placed within the spatial region of site, model site location of asset'],
+        ["Inspection (Process)","Worker (Dependent continuant)",['has participant', 'realizes'],'if Worker is a realizable entity, select realizes'],
+        ["Enquiry (Process)","Contract (Dependent continuant)",['has participant', 'realizes'],'if Contract is a realizable entity, select realizes'],
+        ["Defect (Dependent continuant)","Activity (Process)",['has realization', 'participates in'],'if defect is a realizable entity, select has realization'],
+        ["Chart section (Immaterial entity)", "Repair (Process)", ['environs', 'participates in'],'If Repair occurs within the spatial region of Chart section, then select environs; otherwise, select has participant of'],
+        ["Inspection (Process)", "Asset (Material entity)", ['occurs in', 'has participant'],'If Inspection occurs within the spatial region of Asset, then select occurs in; otherwise, select participates in']
+        ]
+
+      Your Output Should Contain finally chosen BFO type from the candidate BFO relations, together with the corrected entity types from the classrevieweragent.
+        Example Output (for the input above)
+    {'entities':{"Gang":"Material entity","Chart section":"Immaterial entity"} ##outputs from classrevieweragent## 
+     'relations': ##outputs from relationrevieweragent## 
+        [
+        ["Gang","depends on by","Officer"],
+        ["location of","asset"],
+        ["Inspection","realizes","Worker"],
+        ["Enquiry","realizes", "Contract"],
+        ["Defect","participates in","Activity"],
+        ["Chart section", "environs", "Repair"],
+        ["Inspection", "has participant", "Asset"],
+        ]
+    }
+    Your Task
+    Now process the above entities from relationrevieweragent output and return ONLY a valid JSON object. Do NOT output examples.
+  expected_output: >
+  agent: relationrevieweragent

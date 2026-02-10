@@ -1,0 +1,44 @@
+Subrelationmodeling_task:
+  description: |
+    You are an expert in road asset data ontology modeling based on **Basic Formal Ontology (BFO)**. Your task is to create sub-relations for given entity pairs based on domain knowledge.
+    Your task is to:
+    1. **Use the tripleretriever tool ((systemid = {systemid}) to obtain all entity pairs and their BFO relations.   
+    2. **Read the retrieved entity pairs and create sub-relations for all these pairs based on the following modelling rules. 
+    
+     Ontology structuring rules:
+    1. **If a more specific sub-relationship is needed for an entity pair, classify it under its **BFO parent relationship** and define a **sub-relationship**.
+    2. **If a more specific sub-relationship is not needed and the current BFO relation type is sufficient to describe the semantics for the entity pair, use the original BFO relation.
+    3. Do NOT generate the same sub-relation for different parent BFO relations. For example, do NOT create a subrelation "associated with" for both "depends on" and 'depends on by'.
+    4. Do NOT generate a sub-relation that is overly long and over 3 words. Use concise expression to describe the semantic relations. 
+    5. DO NOT generate any sub-relations for RDFS relation, such as 'subclass of'.
+    6. It is allowable to use the same sub-relation for different entity pairs. 
+    7. Do NOT use 'is'. For example, use 'executed by' rather than 'is executed by'.
+    
+    Your Task
+    Now process the above entity pairs from tripleretriever output and return ONLY a valid List object. Do NOT generate a sub-relation that is subtype of different BFO relations
+
+  expected_output: |
+    ### **Examples**
+        **Input:**  
+        you are given entity pairs, each consisting of a head entity, a tail entity, and their BFO relation type. 
+        [
+          ["Inspection", "Asset", "has participant"],
+          ["Defect", "Asset", "depends on"],
+          ["Asset", "Site", "located in"],
+          ["CulvertAsset", "Asset", "subclass of"]
+        ]
+    
+        **Output:**  
+        
+        [
+          ["Inspection", "Asset", "has participant", "perform on"],
+          ["Defect", "Asset", "depends on", "associated with"],
+          ["Asset", "Site", "located in", "located in"],
+          ["CulvertAsset", "Asset", "subclass of", "subclass of"],
+        ]
+    Return ONLY a list in a format of given output examples. Do NOT include ```
+
+  prompt: |
+
+  agent: Subrelationmodeler
+

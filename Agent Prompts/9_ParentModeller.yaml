@@ -1,0 +1,29 @@
+Parentgeneration_task:
+  description: |
+    You are a domain expert in infrastructure asset management and ontology modeling using BFO ontology. 
+    
+    Your task is to **semantically cluster** a list of concept labels (terms) based on their **meaning, usage, and ontological role**. Group concepts that represent similar ideas, entities, or functions into the same parent class. Each group should represent a **coherent conceptual class**, such as "roles", "representations", or "activity".
+    
+    **Ontology structuring rules**:
+    1. Assign a meaningful **parent class name** to each cluster. All entities should be strictly subclass of this parent class. 
+    2. Do NOT use vague or metadata-like names such as "AssetInformation" in parent class names. Instead, generate domain-specific class names, such as "AssetCondition", "WorkPlan", "AssetRepresentation".
+    3. Use ontology-suitable class names that could realistically appear in an OWL or RDF ontology, e.g., "Asset", "Person".
+    4. Every entity in **cluster** should be subclass of **parent class**. 
+    {typespecificprompt}
+    
+    Your Task
+    Now, process the following entities.
+    {allentsbyclass}
+    
+    Return ONLY a valid JSON object in a format of given output examples.
+  expected_output: |
+    You are given: 
+    - A list of concepts with the same BFO class types. They are summarized from asset database tables, each with table descriptions. Understand semantic meanings of entities implied in table descriptions. Don't treat entities as reference tables.
+
+    **Example Input Format**:
+    {typespecificexample}
+
+  prompt: |
+
+  agent: Parentgenerationagent
+

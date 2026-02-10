@@ -1,0 +1,80 @@
+relationextraction_task:
+  description: >
+    ### **Task**
+    1. Execute the relationdiscovery tool with systemid {systemid} and entities: {entities} to extract entity‐pairs.
+  
+    2. Predict semantic relations for these entity pairs based on the below classifications.
+    
+    ## **Full List of BFO Object Properties**
+
+    Below is a list of all relevant **BFO relationships**, along with their **domains**, and **ranges**:
+
+    | **BFO Relationship** |**Domain** | **Range** |
+    |----------------------|---------------|-----------|----------|
+    | **occurs in** | Process | Independent Continuant |
+    | **environs** | Independent Continuant | Process |
+    | **has participant** | Process | Continuant |
+    | **participates in** | Continuant | Process |
+    | ** depends on** | Dependent Continuant | Independent Continuant |
+    | ** depends on by** | Independent Continuant | Dependent Continuant |
+    | **realizes** | Process | Dependent Continuant |
+    | **has realization** | Dependent Continuant | Process |
+    | **preceded by** | Occurrent | Occurrent |
+    | **precedes** | Occurrent | Occurrent |
+    | **has continuant part** | Continuant | Continuant |
+    | **has occurrent part** | Occurrent | Occurrent |
+    | **continuant part of** | Continuant | Continuant |
+    | **occurrent part of** | Occurrent | Occurrent |
+    | **located in** | Independent continuant | Independent continuant |
+    | **location of** | Independent continuant | Independent continuant |
+    | **occupies temporal region** | Process | Temporal Region |
+
+    ## Other basic relations: **subclass of**, **parent class of**
+    
+    ### **Ontology Structuring Rules**
+        1. **Classify the semantic relationship between Entity1 and Entity2 using BFO relationships**:
+          - If a more specific relationship is needed, classify it under a **BFO parent relationship**.
+          - If an entity is simply a subclass/parent class of the other entity, don't use BFO relationships.
+        2. **Use the following format for relationship classification**:
+          - **Example 1 (Sub-relationship needed)**:
+                        `("Inspection", "Asset") → BFO classification:occurs in
+          - **Example 2 (No sub-relationship needed)**:
+                        `("Asset", "Site") → BFO classification: located in
+        3. **When generating relationships, consider**:
+          - The semantic meaning of both entities.
+          - Existing domain knowledge in road asset management.
+          - Domain and range restrictions. For example, if **contract** is a dependent continuant, then its relation with **asset** cannot be **has participant** because the domain of **has participant** is **process**.
+          - In BFO, process and temporal region are subclasses of occurrent; material entity, immaterial entity are subclasses of independent continuant; independent continuant and dependent continuant are subclasses of continunant.
+        4. **Always generate inverse relationships when applicable**:
+          - Example: `[ "Asset", "located in", "Site" ]` → Automatically generate `["Site", "location of ", "Asset"]`.
+        5. **If one entity is a general concept (e.g., **Asset**) and the other entity is a specific subtype (e.g., **Pavement**), choose **parent class of** or **subclass of**.
+
+  expected_output: >
+    ### **Examples**
+    **Input:**  
+    [
+      ["Inspection", "Asset"],
+      ["Defect", "Asset"],
+      ["Asset", "Site"],
+      ["Cost", "Activity"],
+      ["Asset", "Pavement"]
+      ["Soakaway", "Drainage"]
+    ]
+    **Output:**  
+    [
+      ["Inspection", "Asset", "occurs in"],
+      ["Defect", "Asset", "depends on"],
+      ["Asset", "Site", "located in"],
+      ["Cost", "Activity","has realization"],
+      ["Asset", "Pavement","parent class of"],
+      ["Soakaway", "Drainage","subclass of"]
+    ]
+    
+    Now, for the above entity pairs from executed tool, classify the relationships according to BFO object properties.
+    
+    Return ONLY valid JSON output. Do NOT include any explanations. 
+
+  prompt: |    
+  agent: relationmodeller
+
+
