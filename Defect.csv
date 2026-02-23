@@ -1,0 +1,44 @@
+Table Description,"Name: Defect
+Description: Contains the assets' defect information",Unnamed: 2,Unnamed: 3,Unnamed: 4,Unnamed: 5,Unnamed: 6,Unnamed: 7,Unnamed: 8,Unnamed: 9,Unnamed: 10,Unnamed: 11,Unnamed: 12,Unnamed: 13,Unnamed: 14,Historic in Confirm,Unnamed: 16
+,,,,,,,,,,,,,,,,
+Daas column,Type,Nullable,Is PK,Is Identity,Is FK,Is AK,Ref schema,Ref table,Ref column,Ref pull value,Populate from ref,Position,Description,Default,Mapping,Comments
+DefectID,integer,N,Y,N,,Y,,,,,,1,Identifier of the defect,,confirm.defect.defect_number,"In Confirm it is a decimal(8,0). To be cast to int before Curated layer"
+ValidFromDateTime,Datetime2,N,Y,N,,,,,,,,30,DWH internal field to track historic changes done on the table. This date represents the date the asset information was updated,,,
+InspectionBatchID,integer,N,,,Y,,,InspectionBatch,InspectionBatchID,,N,2,Identifier of the inspection batch where the defect was identified,,confirm.defect.insp_batch_no,"In Confirm it is a decimal(8,0). To be cast to int before Curated layer"
+SiteID,varchar(10),N,,,Y,,,Asset,SiteID,,N,3,Identifier of the asset linked to the defect,,confirm.defect.site_code,
+PlotNo,"decimal(10,2)",N,,,Y,,,Asset,PlotNo,,N,4,Identifier of the asset linked to the defect,,confirm.defect.plot_number,
+Description,varchar(2000),Y,,,,,,,,,,5,Description of the defect,,confirm.defect.defect_description,Current max length = 1896
+CreationDateTime,Datetime2,N,,,,,,,,,,6,Creation date of the defect in the system,,confirm.defect.defect_date,
+OfficerID,varchar(4),N,,,Y,,,ActionOfficer,OfficerID,,N,7,Identifier of the officer that identified the defect,,confirm.defect.officer_code,
+DefectTypeID,varchar(4),N,,,Y,,,DefectType,DefectTypeID,,N,8,Identifier of the defect type,,confirm.defect.defect_type,
+LocationNotes,varchar(2000),Y,,,,,,,,,,9,Information about the location of the defect,,confirm.defect.defect_location,Current max length = 1171
+Notes,varchar(2000),Y,,,,,,,,,,10,Comments about the location of the defect,,confirm.defect.defect_notes,Current max length = 1730
+JobID,integer,Y,,,Y,,,Job,JobID,,N,11,Identifier of the job that will fix the defect,,confirm.defect.job_number,"In Confirm it is a decimal(8,0). To be cast to int before Curated layer"
+Easting,"decimal(10,2)",Y,,,,,,,,,,12,Easting coordinates of the defect,,confirm.defect.defect_easting,
+Northing,"decimal(10,2)",Y,,,,,,,,,,13,Northing coordinates of the defect,,confirm.defect.defect_northing,
+Latitude,"decimal(16,8)",Y,,,,,,,,,,14,Latitude coordinates of the defect,,"LatLongConv:confirm.defect.defect_easting,confirm.defect.defect_northing",
+Longitude,"decimal(16,8)",Y,,,,,,,,,,15,Longitude coordinates of the defect,,"LatLongConv:confirm.defect.defect_easting,confirm.defect.defect_northing",
+IsDefectStatusFlag,bit,N,,,,,,,,,,16,Flag that indicates if the defect is still active. 1=true/0=false,1,confirm.defect.defect_status_flag,In Confirm it is a varchar(1). To be cast to bit before Curated layer
+OrganisationID,varchar(4),Y,,,Y,,,Organisation,OrganisationID,,N,17,Identifier of the organisation,,confirm.defect.organise_code,
+SurveyObsStart,"decimal(8,2)",Y,,,,,,,,,,18,Survey observation start,,confirm.defect.survey_obs_start,
+SurveyObsEnd,"decimal(8,2)",Y,,,,,,,,,,19,Survey observation end,,confirm.defect.survey_obs_end,
+SurveyObsValue,"decimal(8,2)",Y,,,,,,,,,,20,Survey observation value,,confirm.defect.survey_obs_value,
+CustomerReference,varchar(20),Y,,,,,,,,,,21,Customer reference value,,confirm.defect.customer_reference,
+PriorityID,varchar(4),Y,,,Y,,,Priority,PriorityID,,N,22,Identifier of the priority of the defect,,confirm.defect.priority_code,
+ObserveTypeID,integer,Y,,,Y,,,ObserveType,ObserveTypeID,,N,23,Identifier of the observation type,,confirm.defect.observe_type_key,"In Confirm it is a decimal(8,0) To be cast to int before Curated layer"
+EstimatedCost,"decimal(12,2)",Y,,,,,,,,,,24,Estimated cost value,,confirm.defect.estimated_cost,
+TargetDateTime,Datetime2,Y,,,,,,,,,,25,Target date time to fix the defect,,confirm.defect.target_date,
+SupersedesDefect,integer,Y,,,,,,,,,,26,Identifier of the defect superseded,,confirm.defect.supersedes_defect,"In Confirm it is a decimal(8,0) To be cast to int before Curated layer"
+SpGeography,varbinary(max),Y,,,,,,,,,,27,Geography information about the defect,,confirm.defect.sp_geography,
+IsDeletedFlag,bit,N,,,,,,,,,,28,DWH internal field to track deletions done on the table. 1 means the entry was deleted in Confirm and is no longer available / 0 means it is a valid entry,0,,Only one current for each SiteID and PlotNo combination
+IsCurrentFlag,bit,N,,,,,,,,,,29,DWH internal field to track historic changes done on the table. 1 means this is the current asset information / 0 it is historic information,1,,Only one current for each PK combination
+ValidToDateTime,Datetime2,Y,,,,,,,,,,31,DWH internal field to track historic changes done on the table. This date represents the last date the asset information was valid,,,
+InsertedDateTime,Datetime2,N,,,,,,,,,,32,Internal DWH audit data,GETUTCDATETIME(),,
+InsertedActivityID,integer,N,,,,,,,,,,33,Internal DWH audit data,,,
+UpdatedDateTime,Datetime2,Y,,,,,,,,,,34,Internal DWH audit data,GETUTCDATETIME(),,
+UpdatedActivityID,integer,Y,,,,,,,,,,35,Internal DWH audit data,,,
+,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,
+Confirm defect fields Out of Scope,,,,,,,,,,,,,,,,
+confirm.defect.xsp_code,,,,,,,,,,,,,,,,
+confirm.defect.defect_altitude,,,,,,,,,,,,,,,,
