@@ -1,5 +1,13 @@
 classextraction_task:
   description: >
+    You are an expert in road asset data ontology modeling based on BFO ontology.
+    
+    ### **Task**
+    1. **Start by identifying the core themes in the schema. For high-priority concepts (e.g., Asset, Inspection, Incident), suggest finer-grained modeling.
+    2. **Cluster tables into ontology entities** based on domain meaning and relationships.
+    3. **For each entity, classify it into one of the BFO categories.**
+    4. **Return output in strict JSON format** as shown below.
+    
     ### **Ontology Structuring Rules**
     1. **Cluster tables into entities** based on relationships and semantic meaning. Put the most relevant table as the first table in the clustered table list. Example clusters:
        - **Contract** → ["Contract", "Contractor", "ContractArea", "ContractBoq"]
@@ -12,7 +20,7 @@ classextraction_task:
        - **Material entity** → Physical entities (e.g., bridge) that spatially extended in 3D dimensions, including **objects**, **object aggregates**, and **object part**.
        - **Immaterial entity** → Spatial entities contains no material entities as parts, including **sites**, **spatial regions**, and **continuant fiat boundary** (point, line, surface).
        - **Dependent continuant** → Including **specifically dependent continuants** like **qualities** of objects, **roles** of a person, or **dispositions** of objects, and **generically dependent continuants** whose content or pattern can have multiple copies, such as maintenance plan sepcifications, cost tables, which can be concretized into specific dependent continuants, such as work plans. 
-       - **Process** → an occurrent entity that exists in tDime by occuring or happening, has temporal parts, and always depends on (as least one) material entity. Typical process includes events, accidents, activity, and tasks like inspections and maintenance.  
+       - **Process** → an occurrent entity that exists in time by occuring or happening, has temporal parts, and always depends on (as least one) material entity. Typical process includes events, accidents, activity, and tasks like inspections and maintenance.  
        - **Temporal region** → an occurrent entity that is part of time (e.g., this moment, time interval, year 2025).  
 
     4. Only conduct ontology modelling for business-level entities and domain-specific tables, such as **Contract**, **Inspection**, etc. Ignore system-level entities and tables, such as **DataKey**, **CommentLibrary**.
@@ -21,11 +29,6 @@ classextraction_task:
     7. **Don't** generate two entities that include overlapping tables.  
     8. Ignore general attribute entities (e.g., **Attribute**, **Parameter**).
     9. Model location (e.g. **Route**) and spatial entities (e.g., **Site**) as **Immaterial entity**.
-    ### **Task**
-    1. **Start by identifying the core themes in the schema. For high-priority concepts (e.g., Asset, Inspection, Incident), suggest finer-grained modeling.
-    2. **Cluster tables into ontology entities** based on domain meaning and relationships.
-    3. **For each entity, classify it into one of the BFO categories.**
-    4. **Return output in strict JSON format** as shown below.
     
     ### **Tables & Relations**
     **Tables:**
@@ -49,4 +52,5 @@ classextraction_task:
     **Return ONLY valid JSON output. Do NOT include any explanations.**
     Now, please start to create {expectentitynumber} entities:
   agent: EntityModeller
+
 
